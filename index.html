@@ -1,0 +1,1724 @@
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Majlis Apresiasi Pengurusan Sekolah PPD Kota Marudu 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+
+<script>
+function showSeatMap(id) {
+  const record = allRecords.find(r => r.id === id);
+
+  if (!record) return;
+
+  document.getElementById('seatMapContent').innerHTML = `
+
+    <div class="text-center">
+
+      <h2 style="color:#e8d5a3; font-size:20px; font-weight:bold;">
+        ${record.name}
+      </h2>
+
+      <p style="color:#8a7a5a; margin-top:6px;">
+        ${record.school}
+      </p>
+
+      <div class="mt-6 p-6 rounded-xl"
+           style="background: rgba(74,154,255,0.08);
+                  border:1px solid rgba(74,154,255,0.2);">
+
+        <div style="font-size:14px; color:#8a7a5a;">
+          Lokasi Tempat Duduk
+        </div>
+
+        <div style="font-size:32px;
+                    font-weight:bold;
+                    color:#4a9aff;
+                    margin-top:8px;">
+          ${record.table}
+        </div>
+
+        <div style="font-size:22px;
+                    color:#ffffff;
+                    margin-top:6px;">
+          Kerusi ${record.seat}
+        </div>
+
+      </div>
+
+      <div class="mt-8">
+
+        <div style="display:grid;
+                    grid-template-columns:repeat(4,1fr);
+                    gap:12px;
+                    justify-items:center;">
+
+          ${generateSeats(record.table, record.seat)}
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  document.getElementById('seatMapModal')
+          .classList.remove('hidden');
+
+  lucide.createIcons();
+}
+
+function closeSeatMap() {
+  document.getElementById('seatMapModal')
+          .classList.add('hidden');
+}
+
+function generateSeats(table, activeSeat) {
+
+  let html = '';
+
+  const seats = ['A1','A2','A3','A4','A5','A6','A7','A8'];
+
+  seats.forEach(seat => {
+
+    const active = seat === activeSeat;
+
+    html += `
+      <div style="
+        width:60px;
+        height:60px;
+        border-radius:12px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:bold;
+        background:${active ? '#4a9aff' : 'rgba(255,255,255,0.06)'};
+        color:${active ? '#ffffff' : '#8a7a5a'};
+        border:1px solid ${active ? '#4a9aff' : 'rgba(255,255,255,0.08)'};
+      ">
+        ${seat}
+      </div>
+    `;
+  });
+
+  return html;
+}</script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+
+    .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+    .font-body { font-family: 'Source Sans 3', sans-serif; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes titleGlow {
+      0%, 100% { 
+        text-shadow: 
+          0 0 20px rgba(212,175,55,0.4),
+          0 0 40px rgba(212,175,55,0.2);
+      }
+      50% { 
+        text-shadow: 
+          0 0 30px rgba(212,175,55,0.8),
+          0 0 60px rgba(212,175,55,0.5),
+          0 0 90px rgba(212,175,55,0.3);
+      }
+    }
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes colorShift {
+      0% { color: #ffd700; }
+      25% { color: #ffed4e; }
+      50% { color: #ffc700; }
+      75% { color: #ffed4e; }
+      100% { color: #ffd700; }
+    }
+    @keyframes wordSlide {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes patternShift {
+      0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+      25% { background-position: 30px 20px, -30px -20px, 0 50px, 0 -50px, 40px 30px, -40px -30px, 60px 10px, -60px -10px, 10px 60px, -10px -60px; }
+      50% { background-position: 60px 40px, -60px -40px, 50px 0, -50px 0, 80px 60px, -80px -60px, 20px 40px, -20px -40px, 40px 20px, -40px -20px; }
+      75% { background-position: 30px 20px, -30px -20px, 0 50px, 0 -50px, 40px 30px, -40px -30px, 60px 10px, -60px -10px, 10px 60px, -10px -60px; }
+      100% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+    }
+    .anim-fade { animation: fadeUp 0.7s ease-out both; }
+    .anim-title-glow { animation: titleGlow 3s ease-in-out infinite; }
+    .anim-title-float { animation: titleFloat 4s ease-in-out infinite; }
+    .anim-word { animation: wordSlide 0.8s ease-out both; }
+    .anim-d1 { animation-delay: 0.1s; }
+    .anim-d2 { animation-delay: 0.2s; }
+    .anim-d3 { animation-delay: 0.3s; }
+    .anim-d4 { animation-delay: 0.4s; }
+    .anim-d5 { animation-delay: 0.5s; }
+    .anim-d6 { animation-delay: 0.6s; }
+
+    .gold-shimmer {
+      background: linear-gradient(90deg, #c9a227, #d4af37, #c9a227, #d4af37, #c9a227);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(212,175,55,0.2);
+    }
+
+    .tab-btn {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 20%;
+      width: 60%;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    .recipient-card {
+      animation: fadeUp 0.5s ease-out both;
+    }
+
+    .hero-pattern {
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212,175,55,0.03) 35px, rgba(212,175,55,0.03) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(212,175,55,0.02) 35px, rgba(212,175,55,0.02) 70px),
+        radial-gradient(circle at 20% 50%, rgba(212,175,55,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(212,175,55,0.05) 0%, transparent 50%);
+    }
+    
+    .sabah-sarawak-backdrop {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 25px, rgba(212,175,55,0.04) 25px, rgba(212,175,55,0.04) 26px),
+        repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(212,175,55,0.04) 25px, rgba(212,175,55,0.04) 26px),
+        radial-gradient(circle at 10% 15%, rgba(184,134,11,0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(184,134,11,0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(212,175,55,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 15% 80%, rgba(212,175,55,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(184,134,11,0.04) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(184,134,11,0.02) 20px, rgba(184,134,11,0.02) 21px),
+        repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(184,134,11,0.02) 20px, rgba(184,134,11,0.02) 21px),
+        repeating-linear-gradient(30deg, transparent, transparent 35px, rgba(212,175,55,0.015) 35px, rgba(212,175,55,0.015) 36px),
+        repeating-linear-gradient(-30deg, transparent, transparent 35px, rgba(212,175,55,0.015) 35px, rgba(212,175,55,0.015) 36px),
+        radial-gradient(circle at 25% 35%, rgba(212,175,55,0.08) 0%, transparent 30%),
+        radial-gradient(circle at 75% 65%, rgba(184,134,11,0.07) 0%, transparent 30%),
+        radial-gradient(circle at 40% 70%, rgba(212,175,55,0.06) 0%, transparent 35%),
+        radial-gradient(circle at 60% 25%, rgba(184,134,11,0.06) 0%, transparent 35%),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(184,134,11,0.015) 40px, rgba(184,134,11,0.015) 42px),
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(212,175,55,0.01) 40px, rgba(212,175,55,0.01) 41px);
+      
+      background-color: #000000;
+      background-attachment: fixed;
+      animation: patternShift 25s ease-in-out infinite;
+    }
+
+    .ornament { opacity: 0.07; pointer-events: none; }
+    .attendance-row { transition: all 0.2s ease; }
+    .attendance-row:hover { background: rgba(212,175,55,0.08); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #000000; }
+    ::-webkit-scrollbar-thumb { background: #c9a227; border-radius: 3px; }
+  </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body">
+  <div id="app" class="w-full h-full overflow-auto relative" style="background: #000000;">
+   <div class="fixed inset-0 sabah-sarawak-backdrop pointer-events-none" style="z-index: 0;"></div>
+   <div class="relative z-10" style="width: 100%; height: auto;">
+    <div class="fixed top-4 right-4 z-40">
+     <button onclick="openAdminLogin()" class="px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all" style="background: rgba(201,162,39,0.2); color: #c9a227; border: 1px solid rgba(201,162,39,0.3);"> <i data-lucide="log-in" style="width:16px;height:16px;"></i> <span id="adminToggleText">Admin Panel</span> </button>
+    </div>
+    <div id="loginModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.8);">
+     <div class="w-full max-w-sm rounded-xl p-8" style="background: #161630; border: 1px solid rgba(184,134,11,0.3);">
+      <div id="roleSelector" class="text-center">
+       <div class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);"><i data-lucide="lock" style="width:32px;height:32px;color:#d4af37;"></i>
+       </div>
+       <h2 class="font-heading font-bold text-2xl mb-2" style="color: #e8d5a3;">Admin Login</h2>
+       <p class="text-sm mb-6" style="color: #8a7a5a;">Pilih peranan anda</p>
+       <div class="space-y-3"><button type="button" onclick="selectRole('admin')" class="w-full px-4 py-3 rounded-lg text-sm font-semibold text-left flex items-center justify-between transition-all hover:opacity-80" style="background: rgba(184,134,11,0.12); color: #b8860b; border: 1px solid rgba(184,134,11,0.2);">
+         <div>
+          <div class="font-semibold">
+           Admin
+          </div>
+          <div class="text-xs" style="color: #8a7a5a;">
+           Buat, edit, padam data
+          </div>
+         </div><i data-lucide="chevron-right" style="width:16px;height:16px;"></i> </button>
+       </div>
+      </div>
+      <div id="loginForm" style="display: none;">
+       <div class="text-center mb-6"><button type="button" onclick="backToRoleSelect()" class="inline-flex items-center gap-2 text-sm mb-4" style="color: #b8860b;"> <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Kembali </button>
+        <h2 class="font-heading font-bold text-2xl" style="color: #e8d5a3;">Masuk sebagai</h2>
+        <p class="text-sm mt-2" style="color: #d4af37;"><span id="selectedRoleLabel">Role</span></p>
+       </div>
+       <form onsubmit="handleLogin(event)">
+        <div class="mb-4"><label class="block text-sm mb-2" style="color: #b8860b;">Kata Laluan</label> <input id="adminPassword" type="password" required class="w-full px-4 py-2.5 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Masukkan kata laluan">
+         <p id="loginError" class="text-xs mt-2" style="color: #e07070; display: none;"></p>
+        </div><button type="submit" class="w-full px-4 py-2.5 rounded-lg text-sm font-semibold" style="background: #b8860b; color: #0d0d1a;">Masuk</button>
+       </form>
+      </div>
+     </div>
+    </div>
+    <header class="hero-pattern relative overflow-hidden" style="background: linear-gradient(135deg, #000000 0%, #0a0a0f 40%, #000000 100%);">
+     <div class="ornament absolute top-4 left-4 text-8xl font-heading" style="color: #d4af37;">
+      ❧
+     </div>
+     <div class="ornament absolute top-4 right-4 text-8xl font-heading" style="color: #d4af37; transform: scaleX(-1);">
+      ❧
+     </div>
+     <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10">
+      <div class="anim-fade anim-d1 mb-6">
+       <div class="inline-flex items-center justify-center w-24 h-24 rounded-full border-2" style="border-color: #d4af37; background: rgba(212,175,55,0.08);">
+        <svg width="48" height="48" viewbox="0 0 48 48" fill="none"><path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" fill="#d4af37" opacity="0.9" /> <circle cx="24" cy="24" r="8" stroke="#c9a227" stroke-width="1.5" fill="none" />
+        </svg>
+       </div>
+      </div>
+      <p class="anim-fade anim-d2 text-xs md:text-sm tracking-[0.35em] uppercase mb-4" style="color: #c9a227;">Pejabat Pendidikan Daerah Kota Marudu</p>
+      <h1 id="mainTitle" class="anim-fade anim-d3 font-heading font-800 text-3xl md:text-5xl lg:text-6xl leading-tight mb-4 gold-shimmer anim-title-glow anim-title-float">Majlis Apresiasi<br>
+        Pengurusan Sekolah</h1>
+      <div class="anim-fade anim-d4 flex items-center justify-center gap-4 mb-6"><span class="block w-16 h-px" style="background: #c9a227;"></span> <span class="text-2xl" style="color: #d4af37;">✦</span> <span class="block w-16 h-px" style="background: #c9a227;"></span>
+      </div>
+      <p class="anim-fade anim-d5 font-heading text-xl md:text-2xl italic mb-2" style="color: #e8d5a3;">Tahun 2026</p>
+      <div class="anim-fade anim-d6 mt-8 inline-flex flex-col sm:flex-row gap-4 text-sm" style="color: #a89870;"><span class="flex items-center gap-2 justify-center"> <i data-lucide="calendar" style="width:16px;height:16px;color:#c9a227;"></i> <span id="eventDate">15 Mac 2026</span> </span> <span class="hidden sm:inline" style="color:#c9a227;">|</span> <span class="flex items-center gap-2 justify-center"> <i data-lucide="map-pin" style="width:16px;height:16px;color:#c9a227;"></i> <span id="eventVenue">Dewan Komuniti Kota Marudu</span> </span>
+      </div>
+     </div>
+     <div class="w-full h-px" style="background: linear-gradient(90deg, transparent, #b8860b, #ffd700, #b8860b, transparent);"></div>
+    </header>
+    <section class="py-12" style="background: linear-gradient(180deg, #0a0a14 0%, #15141f 50%, #0a0a14 100%);">
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div class="anim-fade anim-d1 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashMapen">
+        0
+       </div>
+       <div class="text-xs mt-2 tracking-wider uppercase" style="color: #b8860b;">
+        Penerima MAPEN
+       </div>
+      </div>
+      <div class="anim-fade anim-d2 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashApc">
+        0
+       </div>
+       <div class="text-xs mt-2 tracking-wider uppercase" style="color: #b8860b;">
+        Penerima APC
+       </div>
+      </div>
+      <div class="anim-fade anim-d3 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashPangkat">
+        0
+       </div>
+       <div class="text-xs mt-2 tracking-wider uppercase" style="color: #b8860b;">
+        Naik Pangkat
+       </div>
+      </div>
+      <div class="anim-fade anim-d4 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashPesara">
+        0
+       </div>
+       <div class="text-xs mt-2 tracking-wider uppercase" style="color: #b8860b;">
+        Pesara
+       </div>
+      </div>
+     </div>
+    </section>
+    <div class="w-full h-px" style="background: linear-gradient(90deg, transparent, #b8860b44, transparent);"></div>
+    <section class="py-12" style="background: #0d0d1a;">
+     <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-2 mb-10 overflow-x-auto" id="tabNav"><button onclick="switchTab('mapen')" class="tab-btn active px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all" data-tab="mapen" style="background: #b8860b; color: #0d0d1a;"> <span class="flex items-center gap-2"><i data-lucide="award" style="width:16px;height:16px;"></i> MAPEN</span> </button> <button onclick="switchTab('apc')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="apc" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trophy" style="width:16px;height:16px;"></i> APC</span> </button> <button onclick="switchTab('pangkat')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pangkat" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trending-up" style="width:16px;height:16px;"></i> Naik Pangkat</span> </button> <button onclick="switchTab('pesara')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pesara" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="heart" style="width:16px;height:16px;"></i> Pesara</span> </button> <button onclick="switchTab('kehadiran')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="kehadiran" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="clipboard-check" style="width:16px;height:16px;"></i> Rekod Kehadiran</span> </button>
+<button onclick="switchTab('pengunjung')"
+        class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide"
+        data-tab="pengunjung"
+        style="background: rgba(184,134,11,0.12); color: #b8860b;">
+
+  <span class="flex items-center gap-2">
+    <i data-lucide="users"
+       style="width:16px;height:16px;"></i>
+
+    Pengunjung
+  </span>
+</button>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3 mb-8" id="addDataButtonContainer" style="display: none;"><button onclick="toggleAddForm()" class="px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all" style="background: #60c080; color: #0d0d1a;"> <i data-lucide="plus" style="width:16px;height:16px;"></i> Tambah Data </button>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3 mb-8" id="qrButtonContainer" style="display: none;"><button id="qrCheckinBtn" onclick="toggleQRScanner()" class="px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all" style="background: #4a9aff; color: #0d0d1a;"> <i data-lucide="qr-code" style="width:16px;height:16px;"></i> Scan QR </button>
+      </div>
+      <div class="text-center mb-8">
+       <h2 id="sectionTitle" class="font-heading text-2xl md:text-3xl font-bold" style="color: #e8d5a3;">Penerima Anugerah MAPEN</h2>
+       <p id="sectionDesc" class="text-sm mt-2" style="color: #8a7a5a;">Menerima Anugerah Pengurusan Cemerlang</p>
+      </div><!-- Attendance Stats -->
+      <div id="attendanceStats" style="display: none;">
+       <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="p-4 rounded-lg text-center" style="background: rgba(96,192,128,0.1); border: 1px solid rgba(96,192,128,0.2);">
+         <div class="font-heading text-2xl font-bold" style="color: #60c080;" id="countPresent">
+          0
+         </div>
+         <div class="text-xs mt-1" style="color: #5a9a60;">
+          Hadir
+         </div>
+        </div>
+        <div class="p-4 rounded-lg text-center" style="background: rgba(224,112,112,0.1); border: 1px solid rgba(224,112,112,0.2);">
+         <div class="font-heading text-2xl font-bold" style="color: #e07070;" id="countAbsent">
+          0
+         </div>
+         <div class="text-xs mt-1" style="color: #a05a5a;">
+          Tidak Hadir
+         </div>
+        </div>
+        <div class="p-4 rounded-lg text-center" style="background: rgba(160,160,160,0.1); border: 1px solid rgba(160,160,160,0.2);">
+         <div class="font-heading text-2xl font-bold" style="color: #a0a0a0;" id="countPending">
+          0
+         </div>
+         <div class="text-xs mt-1" style="color: #707070;">
+          Belum Dimark
+         </div>
+        </div>
+       </div>
+      </div>
+      <div id="recipientGrid"
+     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+     style="display:grid;">
+</div>
+      </div><!-- Attendance List -->
+    <div id="attendanceList" style="display:none;">
+
+  <div class="space-y-2">
+    <div id="attendanceContent"></div>
+  </div>
+
+</div>
+
+<div id="visitorList"
+     class="hidden">
+
+  <div class="rounded-xl p-5"
+       style="
+         background:#161630;
+         border:1px solid rgba(184,134,11,0.2);
+       ">
+
+    <div class="flex items-center justify-between mb-5">
+
+      <div>
+        <h3 class="text-lg font-bold"
+            style="color:#e8d5a3;">
+
+          Senarai Pengunjung
+
+        </h3>
+
+        <p class="text-xs mt-1"
+           style="color:#8a7a5a;">
+
+          Rekod tetamu dan pengunjung majlis
+
+        </p>
+      </div>
+
+      <div class="px-3 py-1 rounded-lg text-sm font-semibold"
+           style="
+             background:rgba(74,154,255,0.12);
+             color:#4a9aff;
+           ">
+
+        <span id="visitorCount">0</span> Pengunjung
+
+      </div>
+
+    </div>
+
+   <div class="mb-5">
+
+  <button
+    onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSc3ZDsRUsIqDOq-jm7UVtsFDMLWGxCjIu9VCk2dfxuysnfCYw/viewform','_blank')"
+    class="w-full px-5 py-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all"
+    style="
+      background:#4a9aff;
+      color:white;
+    ">
+
+    <i data-lucide="file-text"
+       style="width:18px;height:18px;"></i>
+
+    Daftar Pengunjung Melalui Google Form
+
+  </button>
+
+</div>
+
+    <div id="visitorContent"
+         class="space-y-2"></div>
+
+  </div>
+
+</div>
+
+
+      </div>
+     </div>
+    </section>
+    <div id="formModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.7);">
+     <div class="w-full max-w-md rounded-xl p-6" style="background: #161630; border: 1px solid rgba(184,134,11,0.2);">
+      <div class="flex items-center justify-between mb-4">
+       <h3 id="modalTitle" class="font-heading font-bold text-xl" style="color: #e8d5a3;">Tambah Data Baru</h3><button onclick="closeForm()" class="p-1 hover:bg-gray-700 rounded-lg transition"><i data-lucide="x" style="width:20px;height:20px;color:#b8860b;"></i></button>
+      </div>
+      <form id="dataForm" onsubmit="handleFormSubmit(event)"><input type="hidden" id="formMode" value="add"> <input type="hidden" id="formIndex" value="">
+       <div class="space-y-4">
+        <div><label class="block text-sm mb-1" style="color: #b8860b;">Nama</label> <input id="formName" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Nama lengkap">
+        </div>
+        <div><label class="block text-sm mb-1" style="color: #b8860b;">Sekolah</label> <input id="formSchool" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Nama sekolah">
+        </div>
+        <div><label class="block text-sm mb-1" style="color: #b8860b;">Jawatan</label> <input id="formRole" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Contoh: Guru Besar">
+        </div>
+        <div><label class="block text-sm mb-1" style="color: #b8860b;">Catatan/Keterangan</label> <input id="formNote" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Catatan khusus">
+        </div>
+       </div>
+       <div class="flex gap-3 mt-6"><button type="button" onclick="closeForm()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: rgba(184,134,11,0.12); color: #b8860b;">Batal</button> <button type="submit" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: #b8860b; color: #0d0d1a;">Simpan</button>
+       </div>
+      </form>
+     </div>
+    </div>
+    <div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.7);">
+     <div class="w-full max-w-sm rounded-xl p-6" style="background: #161630; border: 1px solid rgba(224,112,112,0.2);">
+      <h3 class="font-heading font-bold text-lg mb-2" style="color: #e8d5a3;">Padam Data?</h3>
+      <p class="text-sm mb-6" style="color: #8a7a5a;">Adakah anda pasti ingin memadamkan data ini?</p>
+      <div class="flex gap-3"><button onclick="closeDeleteModal()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: rgba(184,134,11,0.12); color: #b8860b;">Batal</button> <button onclick="confirmDelete()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: #e07070; color: #fff;">Padam</button>
+      </div>
+     </div>
+    </div>
+    <div id="qrModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(0,0,0,0.8);">
+     <div class="w-full max-w-md rounded-xl p-6" style="background: #161630; border: 1px solid rgba(74,154,255,0.3);">
+      <div class="flex items-center justify-between mb-4">
+       <h3 class="font-heading font-bold text-xl" style="color: #4a9aff;">Scan QR Check-in</h3><button onclick="closeQRScanner()" class="p-1 hover:bg-gray-700 rounded-lg transition"><i data-lucide="x" style="width:20px;height:20px;color:#4a9aff;"></i></button>
+      </div>
+      <div id="qrReader" style="width: 100%; border: 1px solid rgba(74,154,255,0.3); border-radius: 8px; padding: 20px; text-align: center; background: rgba(74,154,255,0.05);">
+       <video id="qrVideo" style="width: 100%; max-width: 300px; border-radius: 4px; display: none;"></video>
+       <canvas id="qrCanvas" style="display: none;"></canvas>
+       <div id="qrStatus" style="color: #4a9aff; font-size: 14px; margin-top: 12px;">
+        Inisialisasi kamera...
+       </div><input type="text" id="qrInput" placeholder="Atau masukkan ID/Nama peserta..." class="w-full px-3 py-2 rounded-lg text-sm mt-4" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(74,154,255,0.2);">
+      </div>
+      <div id="qrResult" style="display: none; margin-top: 16px; padding: 12px; border-radius: 8px; text-align: center;">
+       <p id="qrResultText" style="color: #60c080; font-weight: bold; margin: 0;"></p>
+      </div>
+      <div class="flex gap-3 mt-6"><button onclick="closeQRScanner()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: rgba(74,154,255,0.12); color: #4a9aff;">Tutup</button>
+      </div>
+     </div>
+    </div>
+    <footer style="background: #111127;">
+     <div class="w-full h-px" style="background: linear-gradient(90deg, transparent, #b8860b44, transparent);"></div>
+     <div class="max-w-4xl mx-auto px-4 py-8 text-center">
+      <p class="text-xs tracking-widest uppercase mb-2" style="color: #b8860b;">Pejabat Pendidikan Daerah Kota Marudu</p>
+      <p class="text-xs" style="color: #5a5270;">© 2026 — Majlis Apresiasi Pengurusan Sekolah</p>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script>
+    const ROLE_PERMISSIONS = {
+      admin: ['view_all', 'create', 'edit', 'delete', 'generate_reports', 'attendance_record']
+    };
+
+    const ADMIN_CREDENTIALS = {
+      'admin': { password: 'admin2026', role: 'admin', label: 'Admin' }
+    };
+
+    let allRecords = [];
+
+fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec")
+  .then(r => r.json())
+  .then(data => {
+
+    allRecords = data;
+
+    updateView();
+    updateDashboard();
+
+  });
+
+let visitors = [];
+let currentTab = 'mapen';
+let isAdminMode = false;
+let currentUserRole = null;
+let deleteTarget = null;
+
+    const tabInfo = {
+      mapen: { title: "Penerima Anugerah MAPEN", desc: "Menerima Anugerah Pengurusan Cemerlang", icon: "award" },
+      apc: { title: "Penerima Anugerah APC", desc: "Anugerah Perkhidmatan Cemerlang", icon: "trophy" },
+      pangkat: { title: "Penerima Kenaikan Pangkat", desc: "Tahniah atas kenaikan pangkat yang diterima", icon: "trending-up" },
+      pesara: { title: "Penerima Pesara", desc: "Penghargaan atas jasa & dedikasi sepanjang perkhidmatan", icon: "heart" },
+      kehadiran: { title: "Rekod Kehadiran", desc: "Tandai kehadiran peserta majlis", icon: "clipboard-check" },pengunjung: {
+  title: "Kehadiran Pengunjung",
+  desc: "Rekod kehadiran tetamu dan pengunjung",
+  icon: "users"
+}
+    };
+
+    const colorSchemes = {
+      mapen: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)', border: 'rgba(255,215,0,0.2)' },
+      apc: { accent: '#c0a040', badge: 'rgba(192,160,64,0.1)', border: 'rgba(192,160,64,0.2)' },
+      pangkat: { accent: '#60c080', badge: 'rgba(96,192,128,0.1)', border: 'rgba(96,192,128,0.2)' },
+      pesara: { accent: '#e07070', badge: 'rgba(224,112,112,0.1)', border: 'rgba(224,112,112,0.2)' },
+      kehadiran: { accent: '#4a9aff', badge: 'rgba(74,154,255,0.1)', border: 'rgba(74,154,255,0.2)' }
+    };
+
+    function updateDashboard() {
+      // Update dashboard counts to always match actual data
+      document.getElementById('dashMapen').textContent = allRecords.filter(r => r.tab === 'mapen').length;
+      document.getElementById('dashApc').textContent = allRecords.filter(r => r.tab === 'apc').length;
+      document.getElementById('dashPangkat').textContent = allRecords.filter(r => r.tab === 'pangkat').length;
+      document.getElementById('dashPesara').textContent = allRecords.filter(r => r.tab === 'pesara').length;
+    }
+
+    function updateView() {
+      const info = tabInfo[currentTab];
+      document.getElementById('sectionTitle').textContent = info.title;
+      document.getElementById('sectionDesc').textContent = info.desc;
+     document.getElementById('recipientGrid').style.display =
+  currentTab === 'kehadiran' ||
+  currentTab === 'pengunjung'
+    ? 'none'
+    : 'grid';
+document.getElementById('attendanceList').style.display =
+  currentTab === 'kehadiran'
+    ? 'block'
+    : 'none';
+
+document.getElementById('visitorList').style.display =
+  currentTab === 'pengunjung'
+    ? 'block'
+    : 'none';
+const visitorSection =
+  document.getElementById('visitorList');
+
+if (currentTab === 'pengunjung') {
+
+  visitorSection.classList.remove('hidden');
+
+} else {
+
+  visitorSection.classList.add('hidden');
+
+}
+      document.getElementById('attendanceStats').style.display = currentTab === 'kehadiran' ? 'grid' : 'none';
+
+      // Update dashboard counts every time view updates
+      updateDashboard();
+
+     if (currentTab === 'kehadiran') {
+
+  updateAttendanceView();
+
+} else if (currentTab === 'pengunjung') {
+
+  renderVisitors();
+
+} else {
+
+  updateRegularView();
+
+}
+    }
+
+    function updateRegularView() {
+      const tabRecords = allRecords.filter(r => r.tab === currentTab);
+      const colors = colorSchemes[currentTab];
+      const grid = document.getElementById('recipientGrid');
+      grid.innerHTML = '';
+
+      const logoMap = {
+        mapen: window.elementSdk?.config?.logo_mapen || defaultConfig.logo_mapen,
+        apc: window.elementSdk?.config?.logo_apc || defaultConfig.logo_apc,
+        pangkat: window.elementSdk?.config?.logo_pangkat || defaultConfig.logo_pangkat,
+        pesara: window.elementSdk?.config?.logo_pesara || defaultConfig.logo_pesara
+      };
+
+      tabRecords.forEach((record, i) => {
+const qrId = `qr-${record.id}`; // ✅ LETAK SINI
+        const card = document.createElement('div');
+        card.className = 'recipient-card card-hover rounded-xl p-5';
+        card.style.cssText = `background: #161630; border: 1px solid ${colors.border}; animation-delay: ${i * 0.06}s;`;
+        
+        let editDeleteButtons = '';
+        if (isAdminMode && canEdit()) {
+          editDeleteButtons = `
+            <div class="flex gap-2">
+              <button onclick="editData('${record.id}')" class="flex-1 px-2 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1" style="background: rgba(192,160,64,0.2); color: #c0a040;"><i data-lucide="edit" style="width:12px;height:12px;"></i> Edit</button>
+              ${canDelete() ? `<button onclick="showDeleteConfirm('${record.id}')" class="flex-1 px-2 py-1.5 rounded text-xs font-semibold flex items-center justify-center gap-1" style="background: rgba(224,112,112,0.2); color: #e07070;"><i data-lucide="trash-2" style="width:12px;height:12px;"></i> Padam</button>` : ''}
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+<div class="mt-3 text-center">
+  <canvas id="${qrId}" style="margin:auto;"></canvas>
+</div>
+          <div class="flex items-start gap-3 mb-3">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-heading font-bold" style="background: ${colors.badge}; color: ${colors.accent};">
+              ${logoMap[currentTab]}
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-heading font-bold text-sm leading-tight" style="color: #e8d5a3;">${record.name}</h3>
+              <p class="text-xs mt-0.5" style="color: #8a7a5a;">${record.role}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs mb-2" style="color: ${colors.accent};">
+            <i data-lucide="building" style="width:12px;height:12px;"></i>
+            <span>${record.school}</span>
+          </div>
+          <div class="rounded-lg px-3 py-1.5 text-xs mb-3" style="background: ${colors.badge}; color: ${colors.accent};">
+            ${record.note}
+          </div>
+<div class="mt-3">
+  <button 
+    onclick="openSeatMap('${record.id}')"
+    class="w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2"
+    style="background: rgba(74,154,255,0.15); color: #4a9aff; border:1px solid rgba(74,154,255,0.25);"
+  >
+    <i data-lucide="map-pinned" style="width:14px;height:14px;"></i>
+    Map Tempat Duduk
+  </button>
+</div>
+          ${editDeleteButtons}
+        `;
+        grid.appendChild(card);
+setTimeout(() => {
+  const el = document.getElementById(qrId);
+  if (el) {
+    QRCode.toCanvas(el, record.id, { width: 200 });
+  }
+}, 100);
+      });
+
+      lucide.createIcons();
+    }
+
+    function updateAttendanceView() {
+      const allAttendance = allRecords;
+      const colors = colorSchemes.kehadiran;
+      const content = document.getElementById('attendanceContent');
+      content.innerHTML = '';
+
+      // Update stats
+      const present = allAttendance.filter(r => r.attendance_status === 'present').length;
+      const absent = allAttendance.filter(r => r.attendance_status === 'absent').length;
+      const pending = allAttendance.filter(r => !r.attendance_status).length;
+
+      document.getElementById('countPresent').textContent = present;
+      document.getElementById('countAbsent').textContent = absent;
+      document.getElementById('countPending').textContent = pending;
+
+      // Group by category
+      const categoryColors = {
+        mapen: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)' },
+        apc: { accent: '#c0a040', badge: 'rgba(192,160,64,0.1)' },
+        pangkat: { accent: '#60c080', badge: 'rgba(96,192,128,0.1)' },
+        pesara: { accent: '#e07070', badge: 'rgba(224,112,112,0.1)' }
+      };
+
+      const categoryTitles = {
+        mapen: 'Penerima MAPEN (12 orang)',
+        apc: 'Penerima APC (8 orang)',
+        pangkat: 'Penerima Naik Pangkat (10 orang)',
+        pesara: 'Penerima Pesara (6 orang)'
+      };
+
+      const categories = ['mapen', 'apc', 'pangkat', 'pesara'];
+
+      categories.forEach(category => {
+        const records = allAttendance.filter(r => r.tab === category);
+        if (records.length === 0) return;
+
+        // Add category header
+        const header = document.createElement('div');
+        header.className = 'mt-6 mb-4 first:mt-0';
+        header.innerHTML = `
+          <h3 class="font-heading font-bold text-sm" style="color: ${categoryColors[category].accent};">
+            ${categoryTitles[category]}
+          </h3>
+          <div class="w-12 h-0.5 mt-2" style="background: ${categoryColors[category].accent};"></div>
+        `;
+        content.appendChild(header);
+
+        // Add records for this category
+        records.forEach(record => {
+          const row = document.createElement('div');
+          row.className = 'attendance-row rounded-lg p-4 mt-2';
+          
+          // Determine row highlighting based on attendance status
+          let rowBackground = '#161630';
+          let rowBorder = 'rgba(184,134,11,0.2)';
+          let textColor = '#e8d5a3';
+          let secondaryColor = '#8a7a5a';
+          
+          if (record.attendance_status === 'present') {
+            rowBackground = 'rgba(96,192,128,0.15)';
+            rowBorder = 'rgba(96,192,128,0.4)';
+          } else if (record.attendance_status === 'absent') {
+            rowBackground = '#ff0000';
+            rowBorder = '#ff0000';
+            textColor = '#ffffff';
+            secondaryColor = '#ffffff';
+          }
+          row.style.cssText = `background: ${rowBackground}; border: 1px solid ${rowBorder};`;
+
+          const timeText = record.check_in_time ? `<div class="text-xs mt-1" style="color: ${secondaryColor};">Masa: ${record.check_in_time}</div>` : '';
+
+          // Only show buttons if user is admin
+          const buttonSection = isAdminMode && canAttendance() ? `
+              <div class="flex flex-col gap-2 ml-4">
+                <button onclick="toggleAttendance('${record.id}', 'present')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'present' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(96,192,128,0.2); color: #60c080;">
+                  <i data-lucide="check" style="width:12px;height:12px; display: inline;"></i> Hadir
+                </button>
+                <button onclick="toggleAttendance('${record.id}', 'absent')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'absent' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(224,112,112,0.2); color: #e07070;">
+                  <i data-lucide="x" style="width:12px;height:12px; display: inline;"></i> Tidak Hadir
+                </button>
+              </div>
+          ` : `
+              <div class="flex flex-col gap-2 ml-4">
+                <div class="px-3 py-1.5 rounded text-xs font-semibold" style="background: rgba(96,192,128,0.2); color: #60c080; opacity: 0.5; cursor: not-allowed;">
+                  <i data-lucide="check" style="width:12px;height:12px; display: inline;"></i> Hadir
+                </div>
+                <div class="px-3 py-1.5 rounded text-xs font-semibold" style="background: rgba(224,112,112,0.2); color: #e07070; opacity: 0.5; cursor: not-allowed;">
+                  <i data-lucide="x" style="width:12px;height:12px; display: inline;"></i> Tidak Hadir
+                </div>
+              </div>
+          `;
+
+          row.innerHTML = `
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <h4 class="font-semibold text-sm" style="color: ${textColor};">${record.name}</h4>
+                <div class="text-xs mt-1" style="color: ${secondaryColor};">${record.school} • ${record.role}</div>
+                ${timeText}
+              </div>
+              ${buttonSection}
+            </div>
+          `;
+
+          content.appendChild(row);
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    function toggleAttendance(id, status) {
+      const record = allRecords.find(r => r.id === id);
+      if (record) {
+        if (record.attendance_status === status) {
+          record.attendance_status = '';
+          record.check_in_time = '';
+        } else {
+          record.attendance_status = status;
+          record.check_in_time = new Date().toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
+fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+  method: "POST",
+  body: JSON.stringify({
+    action: "attendance",
+    id: record.id,
+    attendance_status: record.attendance_status,
+    check_in_time: record.check_in_time
+  })
+});
+        }
+        updateAttendanceView();
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        const isActive = btn.dataset.tab === tab;
+        btn.classList.toggle('active', isActive);
+        btn.style.background = isActive ? '#b8860b' : 'rgba(184,134,11,0.12)';
+        btn.style.color = isActive ? '#0d0d1a' : '#b8860b';
+      });
+      
+      const addDataContainer = document.getElementById('addDataButtonContainer');
+      const qrContainer = document.getElementById('qrButtonContainer');
+      
+     if (addDataContainer) {
+  if (
+    isAdminMode &&
+    canCreate() &&
+    currentTab !== 'kehadiran' &&
+    currentTab !== 'pengunjung'
+  ) {
+    addDataContainer.style.display = 'flex';
+  } else {
+    addDataContainer.style.display = 'none';
+  }
+}
+
+      if (qrContainer) {
+        if (isAdminMode && canAttendance() && currentTab === 'kehadiran') {
+          qrContainer.style.display = 'flex';
+        } else {
+          qrContainer.style.display = 'none';
+        }
+      }
+      
+      updateView();
+    }
+
+    function toggleAddForm() {
+      if (currentTab === 'kehadiran') return;
+      document.getElementById('formMode').value = 'add';
+      document.getElementById('modalTitle').textContent = 'Tambah Data Baru';
+      document.getElementById('dataForm').reset();
+      document.getElementById('formIndex').value = '';
+      document.getElementById('formModal').classList.remove('hidden');
+    }
+
+    function editData(id) {
+      const record = allRecords.find(r => r.id === id);
+      if (!record) return;
+      
+      document.getElementById('formMode').value = 'edit';
+      document.getElementById('modalTitle').textContent = 'Edit Data';
+      document.getElementById('formName').value = record.name;
+      document.getElementById('formSchool').value = record.school;
+      document.getElementById('formRole').value = record.role;
+      document.getElementById('formNote').value = record.note;
+      document.getElementById('formIndex').value = id;
+      document.getElementById('formModal').classList.remove('hidden');
+    }
+
+    function closeForm() {
+      document.getElementById('formModal').classList.add('hidden');
+      document.getElementById('dataForm').reset();
+    }
+
+ function handleFormSubmit(e) {
+
+  e.preventDefault();
+
+  const mode =
+    document.getElementById('formMode').value;
+
+  const name =
+    document.getElementById('formName').value;
+
+  const school =
+    document.getElementById('formSchool').value;
+
+  const role =
+    document.getElementById('formRole').value;
+
+  const note =
+    document.getElementById('formNote').value;
+
+  const submitBtn =
+    e.target.querySelector('button[type="submit"]');
+
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = '0.6';
+  submitBtn.textContent = 'Menyimpan...';
+
+  if (mode === 'add') {
+
+    const newRecord = {
+      id: Date.now().toString(),
+      tab: currentTab,
+      name,
+      school,
+      role,
+      note,
+      attendance_status: '',
+      check_in_time: ''
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+      method: "POST",
+      body: JSON.stringify({
+        action: "add",
+        ...newRecord
+      })
+    })
+    .then(r => r.json())
+    .then(response => {
+
+      console.log(response);
+
+      if(response.success){
+
+        allRecords.push(newRecord);
+
+        closeForm();
+        updateView();
+
+      } else {
+
+        alert("Gagal simpan data");
+
+      }
+
+    })
+    .catch(err => {
+
+      console.error(err);
+
+      alert("Ralat sambungan Google Sheet");
+
+    })
+    .finally(() => {
+
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.textContent = 'Simpan';
+
+    });
+
+  } else {
+
+    const idx = allRecords.findIndex(
+      r => r.id === document.getElementById('formIndex').value
+    );
+
+    if (idx === -1) {
+
+      alert("Data tidak dijumpai");
+
+      submitBtn.disabled = false;
+      return;
+
+    }
+
+    const updatedRecord = {
+      ...allRecords[idx],
+      name,
+      school,
+      role,
+      note
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+      method: "POST",
+
+      body: JSON.stringify({
+        action: "update",
+        ...updatedRecord
+      })
+    })
+    .then(r => r.json())
+    .then(response => {
+
+      if(response.success){
+
+        allRecords[idx] = updatedRecord;
+
+        closeForm();
+        updateView();
+
+      } else {
+
+        alert("Gagal update data");
+
+      }
+
+    })
+    .catch(err => {
+
+      console.error(err);
+
+      alert("Ralat sambungan Google Sheet");
+
+    })
+    .finally(() => {
+
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.textContent = 'Simpan';
+
+    });
+
+  }
+
+}
+    function showDeleteConfirm(id) {
+      deleteTarget = id;
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.add('hidden');
+      deleteTarget = null;
+    }
+
+    function confirmDelete() {
+      if (!deleteTarget) return;
+      const deleteBtn = document.querySelector('[onclick="confirmDelete()"]');
+      deleteBtn.disabled = true;
+      deleteBtn.style.opacity = '0.6';
+      deleteBtn.textContent = 'Mempadam...';
+
+      setTimeout(() => {
+
+  fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      action: "delete",
+      id: deleteTarget
+    })
+  })
+  .then(r => r.json())
+  .then(response => {
+
+    if(response.success){
+
+      allRecords =
+        allRecords.filter(r => r.id !== deleteTarget);
+
+      closeDeleteModal();
+      updateView();
+
+    }
+
+    deleteBtn.disabled = false;
+    deleteBtn.style.opacity = '1';
+    deleteBtn.textContent = 'Padam';
+
+  });
+
+}, 300);
+}
+
+    function hasPermission(permission) {
+      if (!currentUserRole) return false;
+      return ROLE_PERMISSIONS[currentUserRole]?.includes(permission) || false;
+    }
+
+    function canCreate() { return hasPermission('create'); }
+    function canEdit() { return hasPermission('edit'); }
+    function canDelete() { return hasPermission('delete'); }
+    function canAttendance() { return hasPermission('attendance_record'); }
+
+    let qrScanner = null;
+    let qrScannerActive = false;
+    let qrStream = null;
+    let lastScannedId = null;
+    let lastScanTime = 0;
+    let qrDetectionLoop = null;
+
+    function toggleQRScanner() {
+      if (qrScannerActive) {
+        closeQRScanner();
+      } else {
+        document.getElementById('qrModal').classList.remove('hidden');
+        initQRScanner();
+      }
+    }
+
+    function closeQRScanner() {
+      document.getElementById('qrModal').classList.add('hidden');
+      qrScannerActive = false;
+      if (qrDetectionLoop) {
+        cancelAnimationFrame(qrDetectionLoop);
+        qrDetectionLoop = null;
+      }
+      if (qrStream) {
+        qrStream.getTracks().forEach(track => track.stop());
+        qrStream = null;
+      }
+      lastScannedId = null;
+      const video = document.getElementById('qrVideo');
+      video.srcObject = null;
+    }
+
+    function initQRScanner() {
+      const video = document.getElementById('qrVideo');
+      const canvas = document.getElementById('qrCanvas');
+      const statusDiv = document.getElementById('qrStatus');
+      const inputField = document.getElementById('qrInput');
+
+      // Clear previous state
+      lastScannedId = null;
+      lastScanTime = 0;
+      document.getElementById('qrResult').style.display = 'none';
+
+      // Handle manual input
+      const handleManualInput = (e) => {
+        if (e.key === 'Enter') {
+          const searchTerm = inputField.value.trim();
+          if (!searchTerm) return;
+          
+          const record = allRecords.find(r => 
+            r.id === searchTerm || 
+            r.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          
+          if (record) {
+            processQRData(record.id);
+            inputField.value = '';
+          } else {
+            showQRError('❌ Peserta tidak ditemukan');
+            inputField.value = '';
+          }
+        }
+      };
+
+      // Remove old listener and add new one
+      inputField.removeEventListener('keypress', handleManualInput);
+      inputField.addEventListener('keypress', handleManualInput);
+
+      statusDiv.textContent = 'Memohon akses kamera...';
+      statusDiv.style.color = '#4a9aff';
+
+      // Try to get camera access with simpler constraints
+      navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          facingMode: 'environment'
+        },
+        audio: false
+      })
+        .then(stream => {
+          qrStream = stream;
+          video.srcObject = stream;
+video.setAttribute("playsinline", true);
+video.muted = true; // penting
+
+video.onloadedmetadata = () => {
+  video.play()
+    .then(() => {
+      console.log("✅ Kamera LIVE");
+      video.style.display = 'block';
+      qrScannerActive = true;
+
+      // 🔥 PANGGIL detectQR DI SINI
+      detectQR();
+    })
+    .catch(err => {
+      console.error("❌ Gagal play video:", err);
+    });
+};
+          
+          statusDiv.textContent = '✓ Kamera siap. Arahkan ke QR Code atau masukkan nama peserta...';
+          statusDiv.style.color = '#4a9aff';
+          inputField.focus();
+          
+          // Start QR detection loop
+          const ctx = canvas.getContext('2d');
+          let frameCount = 0;
+          
+          const detectQR = () => {
+            if (!qrScannerActive) return;
+            
+            frameCount++;
+            try {
+              // Only scan every 3rd frame to reduce CPU usage
+              if (frameCount % 3 === 0 && video.readyState === video.HAVE_ENOUGH_DATA) {
+               canvas.width = video.videoWidth / 2;
+canvas.height = video.videoHeight / 2;
+
+ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+// 🔥 DEBUG LETAK SINI
+if (code) {
+  console.log("QR DETECTED:", code.data);
+}
+
+if (code && code.data) {
+  const qrValue = code.data.trim();
+                  const now = Date.now();
+                  
+                  // Prevent duplicate scans within 2 seconds
+                  if (qrValue !== lastScannedId || now - lastScanTime > 2000) {
+                    lastScannedId = qrValue;
+                    lastScanTime = now;
+                    
+                    // Check if this is a participant ID or name
+                    let record = allRecords.find(r => r.id === qrValue);
+                    if (!record) {
+                      record = allRecords.find(r => r.name.toLowerCase().includes(qrValue.toLowerCase()));
+                    }
+                    
+                    if (record) {
+                      processQRData(record.id);
+                    }
+                  }
+                }
+              }
+            } catch(e) {
+              // Continue scanning silently
+            }
+            
+            if (qrScannerActive) {
+              qrDetectionLoop = requestAnimationFrame(detectQR);
+            }
+          };
+          
+          // Start detection loop
+         detectQR();
+        })
+        .catch(err => {
+          console.error('Camera access error:', err);
+          statusDiv.textContent = '❌ Tidak dapat akses kamera. Sila gunakan input manual:';
+          statusDiv.style.color = '#e07070';
+          video.style.display = 'none';
+          qrScannerActive = false;
+          inputField.focus();
+          inputField.placeholder = 'Masukkan ID atau nama peserta...';
+        });
+    }
+
+    function showQRError(message) {
+      const statusDiv = document.getElementById('qrStatus');
+      const resultDiv = document.getElementById('qrResult');
+      const resultText = document.getElementById('qrResultText');
+      
+      resultText.textContent = message;
+      resultDiv.style.background = 'rgba(224,112,112,0.15)';
+      resultDiv.style.border = '1px solid rgba(224,112,112,0.4)';
+      resultDiv.style.display = 'block';
+      
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+      }, 2000);
+    }
+
+    function processQRData(recordId) {
+      const record = allRecords.find(r => r.id === recordId);
+      if (!record) {
+        showQRError('❌ Data peserta tidak valid');
+        return;
+      }
+
+      // Cegah scan berulang
+if (record.attendance_status === 'present') {
+
+  const resultDiv = document.getElementById('qrResult');
+  const resultText = document.getElementById('qrResultText');
+
+  resultText.innerHTML = `
+    <div style="font-size:14px; margin-bottom:4px;">
+      ⚠️ SUDAH CHECK-IN
+    </div>
+    <div style="font-size:12px; opacity:0.9;">
+      ${record.name}
+    </div>
+    <div style="font-size:11px; margin-top:4px; opacity:0.8;">
+      Masa pertama: ${record.check_in_time}
+    </div>
+  `;
+
+  resultDiv.style.background = 'rgba(255,165,0,0.15)';
+  resultDiv.style.border = '1px solid rgba(255,165,0,0.4)';
+  resultDiv.style.display = 'block';
+
+  return;
+}
+
+// Mark as present
+record.attendance_status = 'present';
+
+record.check_in_time =
+  new Date().toLocaleTimeString('ms-MY', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+  method: "POST",
+  body: JSON.stringify({
+    action: "attendance",
+    id: record.id,
+    attendance_status: record.attendance_status,
+    check_in_time: record.check_in_time
+  })
+});
+      const resultDiv = document.getElementById('qrResult');
+      const resultText = document.getElementById('qrResultText');
+
+      resultText.innerHTML = `<div style="font-size: 14px; margin-bottom: 4px;">✓ CHECK-IN BERHASIL</div><div style="font-size: 12px; opacity: 0.9;">${record.name}</div><div style="font-size: 11px; margin-top: 4px; opacity: 0.8;">Masa: ${record.check_in_time}</div>`;
+      resultDiv.style.background = 'rgba(96,192,128,0.15)';
+      resultDiv.style.border = '1px solid rgba(96,192,128,0.4)';
+      resultDiv.style.display = 'block';
+
+      // Update attendance view
+      if (currentTab === 'kehadiran') {
+        updateAttendanceView();
+      }
+
+      setTimeout(() => {
+        resultDiv.style.display = 'none';
+        document.getElementById('qrInput').focus();
+      }, 2500);
+    }
+
+    function selectRole(role) {
+      document.getElementById('roleSelector').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('selectedRoleLabel').textContent = ADMIN_CREDENTIALS[role].label;
+      document.getElementById('loginForm').dataset.role = role;
+      document.getElementById('adminPassword').focus();
+    }
+
+    function backToRoleSelect() {
+      document.getElementById('roleSelector').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      delete document.getElementById('loginForm').dataset.role;
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const role = document.getElementById('loginForm').dataset.role;
+      const password = document.getElementById('adminPassword').value.trim();
+      const creds = ADMIN_CREDENTIALS[role];
+      const errorEl = document.getElementById('loginError');
+
+      if (password === creds.password) {
+        isAdminMode = true;
+        currentUserRole = role;
+        document.getElementById('loginModal').classList.add('hidden');
+        updateAdminUI();
+        updateView();
+        lucide.createIcons();
+      } else {
+        errorEl.textContent = 'Kata laluan salah!';
+        errorEl.style.display = 'block';
+        document.getElementById('adminPassword').value = '';
+      }
+    }
+
+    function updateAdminUI() {
+      const adminBtn = document.querySelector('[onclick="openAdminLogin()"]');
+      const addDataContainer = document.getElementById('addDataButtonContainer');
+      const attendanceTabBtn = document.getElementById('attendanceTabBtn');
+      
+      if (adminBtn) {
+        adminBtn.innerHTML = `<i data-lucide="log-out" style="width:16px;height:16px;"></i> <span>${ADMIN_CREDENTIALS[currentUserRole].label}</span>`;
+        adminBtn.onclick = handleLogout;
+        adminBtn.setAttribute('onclick', 'handleLogout()');
+      }
+      
+      if (addDataContainer) {
+        if (canCreate() && currentTab !== 'kehadiran') {
+          addDataContainer.style.display = 'flex';
+        } else {
+          addDataContainer.style.display = 'none';
+        }
+      }
+
+      // Enable attendance tab for admin
+      if (attendanceTabBtn) {
+        attendanceTabBtn.style.opacity = '1';
+        attendanceTabBtn.style.cursor = 'pointer';
+        attendanceTabBtn.style.pointerEvents = 'auto';
+        attendanceTabBtn.disabled = false;
+        attendanceTabBtn.title = 'Lihat rekod kehadiran';
+        attendanceTabBtn.onclick = function() { switchTab('kehadiran'); };
+        attendanceTabBtn.setAttribute('onclick', "switchTab('kehadiran')");
+      }
+    }
+
+    function handleLogout() {
+      isAdminMode = false;
+      currentUserRole = null;
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      
+      const adminBtn = document.querySelector('[onclick="handleLogout()"]');
+      if (adminBtn) {
+        adminBtn.innerHTML = `<i data-lucide="log-in" style="width:16px;height:16px;"></i> <span>Admin Panel</span>`;
+        adminBtn.setAttribute('onclick', 'openAdminLogin()');
+      }
+      
+      const addDataContainer = document.getElementById('addDataButtonContainer');
+      if (addDataContainer) {
+        addDataContainer.style.display = 'none';
+      }
+
+      // Reset to regular view when not on attendance tab
+      if (currentTab === 'kehadiran') {
+        switchTab('mapen');
+      }
+      
+      updateView();
+      lucide.createIcons();
+    }
+
+    function openAdminLogin() {
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    // --- Element SDK ---
+    const defaultConfig = {
+      main_title: "Majlis Apresiasi\nPengurusan Sekolah",
+      event_date: "15 Mac 2026",
+      event_venue: "Dewan Komuniti Kota Marudu",
+      logo_mapen: "🎖️",
+      logo_apc: "🏅",
+      logo_pangkat: "📈",
+      logo_pesara: "💝",
+      background_color: "#0d0d1a",
+      surface_color: "#161630",
+      text_color: "#e8d5a3",
+      primary_action_color: "#b8860b",
+      secondary_action_color: "#8a7a5a",
+      font_family: "Playfair Display",
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const c = { ...defaultConfig, ...config };
+
+      document.getElementById('mainTitle').innerHTML = (c.main_title || defaultConfig.main_title).replace(/\n/g, '<br>');
+      document.getElementById('eventDate').textContent = c.event_date || defaultConfig.event_date;
+      document.getElementById('eventVenue').textContent = c.event_venue || defaultConfig.event_venue;
+
+      const app = document.getElementById('app');
+      app.style.background = c.background_color;
+
+      document.querySelectorAll('.font-heading').forEach(el => {
+        el.style.fontFamily = `${c.font_family}, Georgia, serif`;
+      });
+
+      const baseSize = c.font_size || 16;
+      document.getElementById('mainTitle').style.fontSize = `${baseSize * 2.5}px`;
+      document.getElementById('sectionTitle').style.fontSize = `${baseSize * 1.75}px`;
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } },
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["event_date", config.event_date || defaultConfig.event_date],
+        ["event_venue", config.event_venue || defaultConfig.event_venue],
+        ["logo_mapen", config.logo_mapen || defaultConfig.logo_mapen],
+        ["logo_apc", config.logo_apc || defaultConfig.logo_apc],
+        ["logo_pangkat", config.logo_pangkat || defaultConfig.logo_pangkat],
+        ["logo_pesara", config.logo_pesara || defaultConfig.logo_pesara],
+      ])
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const actionBtn = document.querySelector('[onclick="toggleAddForm()"]').parentElement;
+      actionBtn.style.display = 'none';
+      switchTab('mapen');
+      lucide.createIcons();
+    });
+
+    switchTab('mapen');
+    lucide.createIcons();
+function openSeatMap(id) {
+
+  const record = allRecords.find(r => r.id === id);
+
+  if (!record) return;
+
+  document.getElementById('seatMapContent').innerHTML = `
+
+    <div class="text-center">
+
+      <h2 style="color:#e8d5a3; font-size:20px; font-weight:bold;">
+        ${record.name}
+      </h2>
+
+      <p style="color:#8a7a5a;">
+        ${record.table} • ${record.seat}
+      </p>
+
+      <div class="mt-4 overflow-hidden rounded-xl"
+           style="border:1px solid rgba(74,154,255,0.2);">
+
+        <img 
+          src="${record.seat_map_url}"
+          style="width:100%; display:block;"
+        >
+
+      </div>
+
+      <a href="${record.seat_map_url}"
+         target="_blank"
+         class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg text-sm font-semibold"
+         style="background:#4a9aff; color:white;">
+
+         <i data-lucide="external-link"
+            style="width:16px;height:16px;"></i>
+
+         Buka Full Map
+      </a>
+
+    </div>
+  `;
+
+  document.getElementById('seatMapModal')
+          .classList.remove('hidden');
+
+  lucide.createIcons();
+}  
+function closeSeatMap() {
+
+  const modal = document.getElementById('seatMapModal');
+
+  modal.classList.add('hidden');
+
+}
+function handleSeatModalClick(event) {
+
+  const modal = document.getElementById('seatMapModal');
+
+  // klik background sahaja
+  if (event.target === modal) {
+
+    closeSeatMap();
+
+  }
+}
+function addVisitor() {
+
+  const input =
+    document.getElementById('visitorName');
+
+  const name = input.value.trim();
+
+  if (!name) return;
+
+  visitors.unshift({
+    id: Date.now(),
+    name,
+    time: new Date().toLocaleTimeString('ms-MY', {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  });
+
+  input.value = '';
+
+  renderVisitors();
+}
+
+function renderVisitors() {
+
+  const content =
+    document.getElementById('visitorContent');
+
+  if (!content) return;
+
+  if (visitors.length === 0) {
+
+    content.innerHTML = `
+      <div class="text-center py-8"
+           style="color:#8a7a5a;">
+
+        Belum ada pengunjung hadir
+
+      </div>
+    `;
+
+    return;
+  }
+
+  content.innerHTML = visitors.map(v => `
+
+    <div class="rounded-lg p-4 flex items-center justify-between"
+         style="background:#161630;
+                border:1px solid rgba(184,134,11,0.15);">
+
+      <div>
+
+        <div style="color:#e8d5a3;
+                    font-weight:600;">
+
+          ${v.name}
+
+        </div>
+
+        <div style="color:#8a7a5a;
+                    font-size:12px;
+                    margin-top:4px;">
+
+          ${v.time}
+
+        </div>
+
+      </div>
+
+      <div class="px-3 py-1 rounded-full text-xs"
+           style="background:rgba(96,192,128,0.15);
+                  color:#60c080;">
+
+        HADIR
+
+      </div>
+
+    </div>
+
+  `).join('');
+}
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f0d87d3c538473c',t:'MTc3Njk1NDI1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><div id="seatMapModal"
+     onclick="handleSeatModalClick(event)"
+     class="hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+     style="background: rgba(0,0,0,0.8);">
+
+  <div class="w-full max-w-lg rounded-xl p-6"
+       style="background:#161630; border:1px solid rgba(74,154,255,0.25);">
+
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-heading text-xl font-bold"
+          style="color:#4a9aff;">
+        Map Tempat Duduk
+      </h3>
+
+      <button onclick="closeSeatMap()">
+        <i data-lucide="x"
+           style="width:20px;height:20px;color:#4a9aff;"></i>
+      </button>
+    </div>
+
+    <div id="seatMapContent"></div>
+
+  </div>
+</div></body>
+</html>
