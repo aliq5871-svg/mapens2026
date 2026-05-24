@@ -7,68 +7,8 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 
 <script>
-function showSeatMap(id) {
-  const record = allRecords.find(r => r.id === id);
-
-  if (!record) return;
-
-  document.getElementById('seatMapContent').innerHTML = `
-
-    <div class="text-center">
-
-      <h2 style="color:#e8d5a3; font-size:20px; font-weight:bold;">
-        ${record.name}
-      </h2>
-
-      <p style="color:#8a7a5a; margin-top:6px;">
-        ${record.school}
-      </p>
-
-      <div class="mt-6 p-6 rounded-xl"
-           style="background: rgba(74,154,255,0.08);
-                  border:1px solid rgba(74,154,255,0.2);">
-
-        <div style="font-size:14px; color:#8a7a5a;">
-          Lokasi Tempat Duduk
-        </div>
-
-        <div style="font-size:32px;
-                    font-weight:bold;
-                    color:#4a9aff;
-                    margin-top:8px;">
-          ${record.table}
-        </div>
-
-        <div style="font-size:22px;
-                    color:#ffffff;
-                    margin-top:6px;">
-          Kerusi ${record.seat}
-        </div>
-
-      </div>
-
-      <div class="mt-8">
-
-        <div style="display:grid;
-                    grid-template-columns:repeat(4,1fr);
-                    gap:12px;
-                    justify-items:center;">
-
-          ${generateSeats(record.table, record.seat)}
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  document.getElementById('seatMapModal')
-          .classList.remove('hidden');
-
-  lucide.createIcons();
-}
-
+function getSeatPosition(seat) { const positions = { A1: { top:'45%', left:'58%' }, A2: { top:'45%', left:'65%' }, A3: { top:'52%', left:'58%' }, A4: { top:'52%', left:'65%' }, B1: { top:'30%', left:'40%' }, B2: { top:'30%', left:'47%' } }; return positions[seat] || { top:'50%', left:'50%' }; }
+function showSeatMap(id) { const record = allRecords.find(r => r.id == id); const pos = getSeatPosition(record.seat); document.getElementById('seatMapContent') .innerHTML = ` <div class="text-center mb-4"> <h2 class="text-xl font-bold" style="color:#e8d5a3;" > ${record.name} </h2> <p style="color:#d1d5db; margin-top:8px;"> Meja: ${record.table || '-'} </p> <p style="color:#ffffff; margin-top:4px;"> Kerusi: ${record.seat || '-'} </p></p> </div> <div class="mt-6 relative"> <img src="https://i.imgur.com/U2XmiSJ.png" class="w-full rounded-xl" style=" border:1px solid rgba(74,154,255,0.2); " > <div style=" position:absolute; top:${pos.top}; left:${pos.left}; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:999px; background:#4a9aff; color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:bold; box-shadow:0 0 20px rgba(74,154,255,0.6); " > ${record.seat} </div> </div> `; document.getElementById('seatMapModal') .classList.remove('hidden'); }
 function closeSeatMap() {
   document.getElementById('seatMapModal')
           .classList.add('hidden');
@@ -292,14 +232,8 @@ function generateSeats(table, activeSeat) {
      </div>
      <div class="ornament absolute top-4 right-4 text-8xl font-heading" style="color: #d4af37; transform: scaleX(-1);">
       ❧
-     </div>
-     <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10">
-      <div class="anim-fade anim-d1 mb-6">
-       <div class="inline-flex items-center justify-center w-24 h-24 rounded-full border-2" style="border-color: #d4af37; background: rgba(212,175,55,0.08);">
-        <svg width="48" height="48" viewbox="0 0 48 48" fill="none"><path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" fill="#d4af37" opacity="0.9" /> <circle cx="24" cy="24" r="8" stroke="#c9a227" stroke-width="1.5" fill="none" />
-        </svg>
-       </div>
-      </div>
+     </div> <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10"> <div class="anim-fade anim-d1 mb-6"> <div class="inline-flex items-center justify-center rounded-full border-2" style=" width:150px; height:150px; border-color:#d4af37; background:rgba(212,175,55,0.08); box-shadow:0 0 40px rgba(212,175,55,0.18); " > <img src="https://i.imgur.com/eY5HQvD.png" alt="Logo PPD Kota Marudu" class="w-32 h-32 object-contain" style=" filter: drop-shadow( 0 0 18px rgba(255,215,0,0.4) ); " > </div>
+ </div>
       <p class="anim-fade anim-d2 text-xs md:text-sm tracking-[0.35em] uppercase mb-4" style="color: #c9a227;">Pejabat Pendidikan Daerah Kota Marudu</p>
       <h1 id="mainTitle" class="anim-fade anim-d3 font-heading font-800 text-3xl md:text-5xl lg:text-6xl leading-tight mb-4 gold-shimmer anim-title-glow anim-title-float">Majlis Apresiasi<br>
         Pengurusan Sekolah</h1>
@@ -495,9 +429,7 @@ function generateSeats(table, activeSeat) {
         </div>
         <div><label class="block text-sm mb-1" style="color: #b8860b;">Jawatan</label> <input id="formRole" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Contoh: Guru Besar">
         </div>
-        <div><label class="block text-sm mb-1" style="color: #b8860b;">Catatan/Keterangan</label> <input id="formNote" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Catatan khusus">
-        </div>
-       </div>
+        <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Catatan/Keterangan </label> <input id="formNote" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Catatan khusus" > </div> <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Meja </label> <input id="formTable" type="text" class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Contoh: VIP 1" > </div> <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Kerusi </label> <input id="formSeat" type="text" class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Contoh: A1" > </div>
        <div class="flex gap-3 mt-6"><button type="button" onclick="closeForm()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: rgba(184,134,11,0.12); color: #b8860b;">Batal</button> <button type="submit" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: #b8860b; color: #0d0d1a;">Simpan</button>
        </div>
       </form>
@@ -550,11 +482,14 @@ function generateSeats(table, activeSeat) {
 
     let allRecords = [];
 
-fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec")
+fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec")
   .then(r => r.json())
   .then(data => {
 
-    allRecords = data;
+   allRecords = data.map(r => ({
+  ...r,
+  id: String(r.id)
+}));
 
     updateView();
     updateDashboard();
@@ -696,7 +631,7 @@ const qrId = `qr-${record.id}`; // ✅ LETAK SINI
           </div>
 <div class="mt-3">
   <button 
-    onclick="openSeatMap('${record.id}')"
+   onclick="showSeatMap('${record.id}')"
     class="w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2"
     style="background: rgba(74,154,255,0.15); color: #4a9aff; border:1px solid rgba(74,154,255,0.25);"
   >
@@ -829,7 +764,7 @@ setTimeout(() => {
     }
 
     function toggleAttendance(id, status) {
-      const record = allRecords.find(r => r.id === id);
+      const record = allRecords.find(r => r.id == id);
       if (record) {
         if (record.attendance_status === status) {
           record.attendance_status = '';
@@ -837,7 +772,7 @@ setTimeout(() => {
         } else {
           record.attendance_status = status;
           record.check_in_time = new Date().toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
-fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
   method: "POST",
   body: JSON.stringify({
     action: "attendance",
@@ -896,19 +831,30 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
       document.getElementById('formModal').classList.remove('hidden');
     }
 
-    function editData(id) {
-      const record = allRecords.find(r => r.id === id);
-      if (!record) return;
-      
-      document.getElementById('formMode').value = 'edit';
-      document.getElementById('modalTitle').textContent = 'Edit Data';
-      document.getElementById('formName').value = record.name;
-      document.getElementById('formSchool').value = record.school;
-      document.getElementById('formRole').value = record.role;
-      document.getElementById('formNote').value = record.note;
-      document.getElementById('formIndex').value = id;
-      document.getElementById('formModal').classList.remove('hidden');
-    }
+   function editData(id) {
+
+  console.log("EDIT ID:", id);
+  console.log(allRecords);
+
+  const record = allRecords.find(r => r.id == id);
+
+  if (!record) {
+    alert("Data tidak dijumpai");
+    return;
+  }
+
+  document.getElementById('formMode').value = 'edit';
+  document.getElementById('modalTitle').textContent = 'Edit Data';
+  document.getElementById('formName').value = record.name;
+  document.getElementById('formSchool').value = record.school;
+  document.getElementById('formRole').value = record.role;
+  document.getElementById('formNote').value = record.note;
+document.getElementById('formTable').value = record.table || ''; document.getElementById('formSeat').value = record.seat || '';
+  document.getElementById('formIndex').value = id;
+
+  document.getElementById('formModal')
+          .classList.remove('hidden');
+}
 
     function closeForm() {
       document.getElementById('formModal').classList.add('hidden');
@@ -933,6 +879,8 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
 
   const note =
     document.getElementById('formNote').value;
+const table = document.getElementById('formTable').value;
+ const seat = document.getElementById('formSeat').value;
 
   const submitBtn =
     e.target.querySelector('button[type="submit"]');
@@ -943,18 +891,20 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
 
   if (mode === 'add') {
 
-    const newRecord = {
-      id: Date.now().toString(),
-      tab: currentTab,
-      name,
-      school,
-      role,
-      note,
-      attendance_status: '',
-      check_in_time: ''
-    };
+   const newRecord = 
+{ id: Date.now().toString(), 
+tab: currentTab, 
+name, 
+school, 
+role, 
+note, 
+table, 
+seat, 
+attendance_status: '', 
+check_in_time: '' 
+};
 
-    fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
       method: "POST",
       body: JSON.stringify({
         action: "add",
@@ -1010,15 +960,19 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
 
     }
 
-    const updatedRecord = {
-      ...allRecords[idx],
-      name,
-      school,
-      role,
-      note
-    };
+const updatedRecord = {
+  ...allRecords[idx],
+  name,
+  school,
+  role,
+  note,
+  table,
+  seat
+};
 
-    fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+
+
+    fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
       method: "POST",
 
       body: JSON.stringify({
@@ -1080,7 +1034,7 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
 
       setTimeout(() => {
 
-  fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
     method: "POST",
     body: JSON.stringify({
       action: "delete",
@@ -1346,7 +1300,7 @@ record.check_in_time =
     minute: '2-digit'
   });
 
-fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1SpzwtkhrePnmJk9XHfeKzTRk1lmQ7e_B3C/exec", {
+fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
   method: "POST",
   body: JSON.stringify({
     action: "attendance",
@@ -1552,7 +1506,7 @@ fetch("https://script.google.com/macros/s/AKfycbwmesw1TfbiglnXw_-Xia6GRzmlOyAof1
     lucide.createIcons();
 function openSeatMap(id) {
 
-  const record = allRecords.find(r => r.id === id);
+  const record = allRecords.find(r => r.id == id);
 
   if (!record) return;
 
