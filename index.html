@@ -184,6 +184,58 @@ function generateSeats(table, activeSeat) {
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #000000; }
     ::-webkit-scrollbar-thumb { background: #c9a227; border-radius: 3px; }
+html,
+body,
+#app{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+}
+
+section{
+  width:100%;
+}
+
+#recipientGrid{
+  width:100%;
+}
+
+#tabNav{
+  width:100%;
+  -webkit-overflow-scrolling:touch;
+}
+
+canvas{
+  max-width:100%;
+  height:auto;
+}
+
+video{
+  max-width:100%;
+  height:auto;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+footer{
+  width:100%;
+}
+
+@media (max-width:640px){
+
+  .grid-cols-2{
+    grid-template-columns:1fr;
+  }
+
+  #mainTitle{
+    font-size:2rem !important;
+    line-height:1.2 !important;
+  }
+
+}
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <style>body { box-sizing: border-box; }</style>
@@ -654,16 +706,20 @@ setTimeout(() => {
     }
 
     function updateAttendanceView() {
-     const allAttendance = allRecords.filter(r =>
+      const allAttendance = allRecords.filter(r =>
+
   ['mapen','apc','pangkat','pesara']
-    .includes(r.tab)
+    .includes(
+      String(r.tab).trim().toLowerCase()
+    )
+
 );
       const colors = colorSchemes.kehadiran;
       const content = document.getElementById('attendanceContent');
       content.innerHTML = '';
 
       // Update stats
-      const present = allAttendance.filter(r =>
+     const present = allAttendance.filter(r =>
 
   r.attendance_status === 'present' ||
   r.attendance_status === 'Hadir'
@@ -699,6 +755,7 @@ const pending = allAttendance.filter(r =>
       };
 
       const categoryTitles = {
+
   mapen:
     `Penerima MAPEN (${allAttendance.filter(r => r.tab === 'mapen').length} orang)`,
 
@@ -710,6 +767,7 @@ const pending = allAttendance.filter(r =>
 
   pesara:
     `Penerima Pesara (${allAttendance.filter(r => r.tab === 'pesara').length} orang)`
+
 };
 
       const categories = ['mapen', 'apc', 'pangkat', 'pesara'];
@@ -735,31 +793,20 @@ const pending = allAttendance.filter(r =>
           row.className = 'attendance-row rounded-lg p-4 mt-2';
           
           // Determine row highlighting based on attendance status
-         // Determine row highlighting based on attendance status
-let rowBackground = '#161630';
-let rowBorder = 'rgba(184,134,11,0.2)';
-let textColor = '#e8d5a3';
-let secondaryColor = '#8a7a5a';
-
-if (
-  record.attendance_status === 'present' ||
-  record.attendance_status === 'Hadir'
-) {
-
-  rowBackground = 'rgba(96,192,128,0.15)';
-  rowBorder = 'rgba(96,192,128,0.4)';
-
-} else if (
-  record.attendance_status === 'absent' ||
-  record.attendance_status === 'Tidak Hadir'
-) {
-
-  rowBackground = '#ff0000';
-  rowBorder = '#ff0000';
-
-  textColor = '#ffffff';
-  secondaryColor = '#ffffff';
-}
+          let rowBackground = '#161630';
+          let rowBorder = 'rgba(184,134,11,0.2)';
+          let textColor = '#e8d5a3';
+          let secondaryColor = '#8a7a5a';
+          
+          if (record.attendance_status === 'present') {
+            rowBackground = 'rgba(96,192,128,0.15)';
+            rowBorder = 'rgba(96,192,128,0.4)';
+          } else if (record.attendance_status === 'absent') {
+            rowBackground = '#ff0000';
+            rowBorder = '#ff0000';
+            textColor = '#ffffff';
+            secondaryColor = '#ffffff';
+          }
           row.style.cssText = `background: ${rowBackground}; border: 1px solid ${rowBorder};`;
 
           const timeText = record.check_in_time ? `<div class="text-xs mt-1" style="color: ${secondaryColor};">Masa: ${record.check_in_time}</div>` : '';
@@ -767,10 +814,10 @@ if (
           // Only show buttons if user is admin
           const buttonSection = isAdminMode && canAttendance() ? `
               <div class="flex flex-col gap-2 ml-4">
-                <button onclick="toggleAttendance('${record.id}', 'present')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'Hadir' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(96,192,128,0.2); color: #60c080;">
+                <button onclick="toggleAttendance('${record.id}', 'present')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'present' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(96,192,128,0.2); color: #60c080;">
                   <i data-lucide="check" style="width:12px;height:12px; display: inline;"></i> Hadir
                 </button>
-                <button onclick="toggleAttendance('${record.id}', 'absent')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'Tidak Hadir' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(224,112,112,0.2); color: #e07070;">
+                <button onclick="toggleAttendance('${record.id}', 'absent')" class="px-3 py-1.5 rounded text-xs font-semibold ${record.attendance_status === 'absent' ? 'opacity-100' : 'opacity-50'} transition-all hover:opacity-100" style="background: rgba(224,112,112,0.2); color: #e07070;">
                   <i data-lucide="x" style="width:12px;height:12px; display: inline;"></i> Tidak Hadir
                 </button>
               </div>
@@ -1317,7 +1364,7 @@ function playBeep() {
   );
 
   gainNode.gain.setValueAtTime(
-    0.1,
+    0.2,
     audioCtx.currentTime
   );
 
@@ -1330,297 +1377,6 @@ function playBeep() {
   oscillator.stop(
     audioCtx.currentTime + 0.15
   );
-}
-
-function processQRData(id) {
-
-  const record =
-    allRecords.find(r => r.id == id);
-
-  if (!record) {
-
-    showQRError('❌ Peserta tidak ditemukan');
-    return;
-  }
-
-  record.attendance_status = 'Hadir';
-
-  record.check_in_time =
-    new Date().toLocaleTimeString(
-      'ms-MY',
-      {
-        hour: '2-digit',
-        minute: '2-digit'
-      }
-    );
-
-  fetch(
-    "https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        action: "attendance",
-        id: record.id,
-        attendance_status: record.attendance_status,
-        check_in_time: record.check_in_time
-      })
-    }
-  );
-
-  playBeep();
-
-  const resultDiv =
-    document.getElementById('qrResult');
-
-  const resultText =
-    document.getElementById('qrResultText');
-
-  resultText.textContent =
-    `✅ ${record.name} berjaya check-in`;
-
-  resultDiv.style.background =
-    'rgba(96,192,128,0.15)';
-
-  resultDiv.style.border =
-    '1px solid rgba(96,192,128,0.4)';
-
-  resultDiv.style.display = 'block';
-
-  updateAttendanceView();
-
-  setTimeout(() => {
-
-    resultDiv.style.display = 'none';
-
-  }, 2000);
-}
-
-function openAdminLogin() {
-
-  document.getElementById('loginModal')
-          .classList.remove('hidden');
-
-  document.getElementById('roleSelector')
-          .style.display = 'block';
-
-  document.getElementById('loginForm')
-          .style.display = 'none';
-}
-
-function selectRole(role) {
-
-  currentUserRole = role;
-
-  document.getElementById('selectedRoleLabel')
-          .textContent =
-            ADMIN_CREDENTIALS[role].label;
-
-  document.getElementById('roleSelector')
-          .style.display = 'none';
-
-  document.getElementById('loginForm')
-          .style.display = 'block';
-}
-
-function backToRoleSelect() {
-
-  document.getElementById('roleSelector')
-          .style.display = 'block';
-
-  document.getElementById('loginForm')
-          .style.display = 'none';
-}
-
-function handleLogin(e) {
-
-  e.preventDefault();
-
-  const password =
-    document.getElementById('adminPassword').value;
-
-  const loginError =
-    document.getElementById('loginError');
-
-  const credential =
-    ADMIN_CREDENTIALS[currentUserRole];
-
-  if (
-    credential &&
-    password === credential.password
-  ) {
-
-    isAdminMode = true;
-
-    document.getElementById('loginModal')
-            .classList.add('hidden');
-
-    document.getElementById('adminToggleText')
-            .textContent = 'Admin Aktif';
-
-    switchTab(currentTab);
-
-  } else {
-
-    loginError.textContent =
-      'Kata laluan salah';
-
-    loginError.style.display = 'block';
-  }
-}
-
-function renderVisitors() {
-
-  const container =
-    document.getElementById('visitorContent');
-
-  const count =
-    document.getElementById('visitorCount');
-
-  container.innerHTML = '';
-
-  count.textContent = visitors.length;
-
-  if (visitors.length === 0) {
-
-    container.innerHTML = `
-      <div class="text-center py-10"
-           style="color:#8a7a5a;">
-
-        Belum ada pengunjung direkodkan
-
-      </div>
-    `;
-
-    return;
-  }
-
-  visitors.forEach(v => {
-
-    const row = document.createElement('div');
-
-    row.className =
-      'rounded-lg p-4';
-
-    row.style.background =
-      'rgba(255,255,255,0.04)';
-
-    row.style.border =
-      '1px solid rgba(255,255,255,0.06)';
-
-    row.innerHTML = `
-      <div class="flex items-center justify-between">
-
-        <div>
-
-          <div style="
-            color:#e8d5a3;
-            font-weight:600;
-          ">
-            ${v.name || '-'}
-          </div>
-
-          <div style="
-            color:#8a7a5a;
-            font-size:12px;
-            margin-top:4px;
-          ">
-            ${v.organization || '-'}
-          </div>
-
-        </div>
-
-        <div style="
-          color:#4a9aff;
-          font-size:12px;
-        ">
-          ${v.time || '-'}
-        </div>
-
-      </div>
-    `;
-
-    container.appendChild(row);
-  });
-}
-
-lucide.createIcons();
-</script>
-</body>
-</html>  );
-
-  gainNode.gain.setValueAtTime(
-    0.1,
-    audioCtx.currentTime
-  );
-
-  oscillator.connect(gainNode);
-
-  gainNode.connect(audioCtx.destination);
-
-  oscillator.start();
-
-  oscillator.stop(
-    audioCtx.currentTime + 0.15
-  );
-}function processQRData(id) {
-
-  const record =
-    allRecords.find(r => r.id == id);
-
-  if (!record) {
-
-    showQRError('❌ Peserta tidak ditemukan');
-    return;
-
-  }
-
-  record.attendance_status = 'Hadir';
-
-  record.check_in_time =
-    new Date().toLocaleTimeString(
-      'ms-MY',
-      {
-        hour: '2-digit',
-        minute: '2-digit'
-      }
-    );
-
-  fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
-    method: "POST",
-    body: JSON.stringify({
-      action: "attendance",
-      id: record.id,
-      attendance_status: record.attendance_status,
-      check_in_time: record.check_in_time
-    })
-  });
-
-  playBeep();
-
-  const resultDiv =
-    document.getElementById('qrResult');
-
-  const resultText =
-    document.getElementById('qrResultText');
-
-  resultText.textContent =
-    `✅ ${record.name} berjaya check-in`;
-
-  resultDiv.style.background =
-    'rgba(96,192,128,0.15)';
-
-  resultDiv.style.border =
-    '1px solid rgba(96,192,128,0.4)';
-
-  resultDiv.style.display = 'block';
-
-  updateAttendanceView();
-
-  setTimeout(() => {
-
-    resultDiv.style.display = 'none';
-
-  }, 2000);
 }
     function processQRData(recordId) {
 playBeep();
@@ -1631,7 +1387,8 @@ playBeep();
       }
 
       // Cegah scan berulang
-if ( record.attendance_status === 'present' || record.attendance_status === 'Hadir' ) { rowBackground = 'rgba(96,192,128,0.15)'; rowBorder = 'rgba(96,192,128,0.4)'; } else if ( record.attendance_status === 'Tidak Hadir' || record.attendance_status === 'Tidak Hadir' ) { rowBackground = '#ff0000'; rowBorder = '#ff0000'; textColor = '#ffffff'; secondaryColor = '#ffffff'; }
+if (record.attendance_status === 'present') {
+
   const resultDiv = document.getElementById('qrResult');
   const resultText = document.getElementById('qrResultText');
 
