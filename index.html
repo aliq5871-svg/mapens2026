@@ -1359,12 +1359,12 @@ function playBeep() {
   oscillator.type = 'sine';
 
   oscillator.frequency.setValueAtTime(
-    900,
+    1400,
     audioCtx.currentTime
   );
 
   gainNode.gain.setValueAtTime(
-    0.2,
+    0.5,
     audioCtx.currentTime
   );
 
