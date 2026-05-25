@@ -279,12 +279,91 @@ footer{
      </div>
     </div>
     <header class="hero-pattern relative overflow-hidden" style="background: linear-gradient(135deg, #000000 0%, #0a0a0f 40%, #000000 100%);">
-     <div class="ornament absolute top-4 left-4 text-8xl font-heading" style="color: #d4af37;">
-      ❧
-     </div>
-     <div class="ornament absolute top-4 right-4 text-8xl font-heading" style="color: #d4af37; transform: scaleX(-1);">
-      ❧
-     </div> <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10"> <div class="anim-fade anim-d1 mb-6"> <div class="inline-flex items-center justify-center rounded-full border-2" style=" width:150px; height:150px; border-color:#d4af37; background:rgba(212,175,55,0.08); box-shadow:0 0 40px rgba(212,175,55,0.18); " > <img src="https://i.imgur.com/eY5HQvD.png" alt="Logo PPD Kota Marudu" class="w-32 h-32 object-contain" style=" filter: drop-shadow( 0 0 18px rgba(255,215,0,0.4) ); " > </div>
+    <div class="absolute inset-0 pointer-events-none">
+
+  <!-- BATIK KIRI -->
+  <div
+    class="absolute top-0 left-0"
+    style="
+      width:420px;
+      height:420px;
+      opacity:0.45;
+
+      background-image:
+
+      radial-gradient(
+        circle,
+        rgba(255,215,0,0.45) 3px,
+        transparent 4px
+      ),
+
+      repeating-radial-gradient(
+        circle at center,
+        rgba(212,175,55,0.18) 0px,
+        rgba(212,175,55,0.18) 4px,
+        transparent 4px,
+        transparent 32px
+      ),
+
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,215,0,0.10) 0px,
+        rgba(255,215,0,0.10) 3px,
+        transparent 3px,
+        transparent 48px
+      );
+
+      background-size:
+        60px 60px,
+        160px 160px,
+        100px 100px;
+
+      clip-path:polygon(0 0,100% 0,0 100%);
+    ">
+  </div>
+
+  <!-- BATIK KANAN -->
+  <div
+    class="absolute top-0 right-0"
+    style="
+      width:420px;
+      height:420px;
+      opacity:0.45;
+
+      background-image:
+
+      radial-gradient(
+        circle,
+        rgba(255,215,0,0.45) 3px,
+        transparent 4px
+      ),
+
+      repeating-radial-gradient(
+        circle at center,
+        rgba(212,175,55,0.18) 0px,
+        rgba(212,175,55,0.18) 4px,
+        transparent 4px,
+        transparent 32px
+      ),
+
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,215,0,0.10) 0px,
+        rgba(255,215,0,0.10) 3px,
+        transparent 3px,
+        transparent 48px
+      );
+
+      background-size:
+        60px 60px,
+        160px 160px,
+        100px 100px;
+
+      clip-path:polygon(100% 0,100% 100%,0 0);
+    ">
+  </div>
+
+</div><div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10"> <div class="anim-fade anim-d1 mb-6"> <div class="inline-flex items-center justify-center rounded-full border-2" style=" width:150px; height:150px; border-color:#d4af37; background:rgba(212,175,55,0.08); box-shadow:0 0 40px rgba(212,175,55,0.18); " > <img src="https://i.imgur.com/eY5HQvD.png" alt="Logo PPD Kota Marudu" class="w-32 h-32 object-contain" style=" filter: drop-shadow( 0 0 18px rgba(255,215,0,0.4) ); " > </div>
  </div>
       <p class="anim-fade anim-d2 text-xs md:text-sm tracking-[0.35em] uppercase mb-4" style="color: #c9a227;">Pejabat Pendidikan Daerah Kota Marudu</p>
       <h1 id="mainTitle" class="anim-fade anim-d3 font-heading font-800 text-3xl md:text-5xl lg:text-6xl leading-tight mb-4 gold-shimmer anim-title-glow anim-title-float">Majlis Apresiasi<br>
@@ -300,11 +379,11 @@ footer{
     <section class="py-12" style="background: linear-gradient(180deg, #0a0a14 0%, #15141f 50%, #0a0a14 100%);">
      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
       <div class="anim-fade anim-d1 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
-       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashMapen">
+       <div class="font-heading text-4xl font-bold" style="color: #ffd700;" id="dashMAPeNS">
         0
        </div>
        <div class="text-xs mt-2 tracking-wider uppercase" style="color: #b8860b;">
-        Penerima MAPEN
+        Penerima MAPeNS
        </div>
       </div>
       <div class="anim-fade anim-d2 p-5 rounded-lg" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
@@ -336,7 +415,7 @@ footer{
     <div class="w-full h-px" style="background: linear-gradient(90deg, transparent, #b8860b44, transparent);"></div>
     <section class="py-12" style="background: #0d0d1a;">
      <div class="max-w-5xl mx-auto px-4">
-      <div class="flex flex-wrap justify-center gap-2 mb-10 overflow-x-auto" id="tabNav"><button onclick="switchTab('mapen')" class="tab-btn active px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all" data-tab="mapen" style="background: #b8860b; color: #0d0d1a;"> <span class="flex items-center gap-2"><i data-lucide="award" style="width:16px;height:16px;"></i> MAPEN</span> </button> <button onclick="switchTab('apc')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="apc" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trophy" style="width:16px;height:16px;"></i> APC</span> </button> <button onclick="switchTab('pangkat')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pangkat" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trending-up" style="width:16px;height:16px;"></i> Naik Pangkat</span> </button> <button onclick="switchTab('pesara')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pesara" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="heart" style="width:16px;height:16px;"></i> Pesara</span> </button> <button onclick="switchTab('kehadiran')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="kehadiran" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="clipboard-check" style="width:16px;height:16px;"></i> Rekod Kehadiran</span> </button>
+      <div class="flex flex-wrap justify-center gap-2 mb-10 overflow-x-auto" id="tabNav"><button onclick="switchTab('MAPeNS')" class="tab-btn active px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide transition-all" data-tab="MAPeNS" style="background: #b8860b; color: #0d0d1a;"> <span class="flex items-center gap-2"><i data-lucide="award" style="width:16px;height:16px;"></i> MAPeNS</span> </button> <button onclick="switchTab('apc')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="apc" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trophy" style="width:16px;height:16px;"></i> APC</span> </button> <button onclick="switchTab('pangkat')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pangkat" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="trending-up" style="width:16px;height:16px;"></i> Naik Pangkat</span> </button> <button onclick="switchTab('pesara')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="pesara" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="heart" style="width:16px;height:16px;"></i> Pesara</span> </button> <button onclick="switchTab('kehadiran')" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide" data-tab="kehadiran" style="background: rgba(184,134,11,0.12); color: #b8860b;"> <span class="flex items-center gap-2"><i data-lucide="clipboard-check" style="width:16px;height:16px;"></i> Rekod Kehadiran</span> </button>
 <button onclick="switchTab('pengunjung')"
         class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide"
         data-tab="pengunjung"
@@ -355,7 +434,7 @@ footer{
       <div class="flex flex-wrap justify-center gap-3 mb-8" id="qrButtonContainer" style="display: none;"><button id="qrCheckinBtn" onclick="toggleQRScanner()" class="px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transition-all" style="background: #4a9aff; color: #0d0d1a;"> <i data-lucide="qr-code" style="width:16px;height:16px;"></i> Scan QR </button>
       </div>
       <div class="text-center mb-8">
-       <h2 id="sectionTitle" class="font-heading text-2xl md:text-3xl font-bold" style="color: #e8d5a3;">Penerima Anugerah MAPEN</h2>
+       <h2 id="sectionTitle" class="font-heading text-2xl md:text-3xl font-bold" style="color: #e8d5a3;">Penerima Anugerah MAPeNS</h2>
        <p id="sectionDesc" class="text-sm mt-2" style="color: #8a7a5a;">Menerima Anugerah Pengurusan Cemerlang</p>
       </div><!-- Attendance Stats -->
       <div id="attendanceStats" style="display: none;">
@@ -481,6 +560,28 @@ footer{
         </div>
         <div><label class="block text-sm mb-1" style="color: #b8860b;">Jawatan</label> <input id="formRole" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style="background: #0d0d1a; color: #e8d5a3; border: 1px solid rgba(184,134,11,0.2);" placeholder="Contoh: Guru Besar">
         </div>
+<div>
+
+  <label class="block text-sm mb-1"
+         style="color:#b8860b;">
+
+    URL Gambar
+
+  </label>
+
+  <input
+    id="formPhoto"
+    type="text"
+    class="w-full px-3 py-2 rounded-lg text-sm"
+    style="
+      background:#0d0d1a;
+      color:#e8d5a3;
+      border:1px solid rgba(184,134,11,0.2);
+    "
+    placeholder="https://..."
+  >
+
+</div>
         <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Catatan/Keterangan </label> <input id="formNote" type="text" required class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Catatan khusus" > </div> <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Meja </label> <input id="formTable" type="text" class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Contoh: VIP 1" > </div> <div> <label class="block text-sm mb-1" style="color: #b8860b;"> Kerusi </label> <input id="formSeat" type="text" class="w-full px-3 py-2 rounded-lg text-sm" style=" background:#0d0d1a; color:#e8d5a3; border:1px solid rgba(184,134,11,0.2); " placeholder="Contoh: A1" > </div>
        <div class="flex gap-3 mt-6"><button type="button" onclick="closeForm()" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: rgba(184,134,11,0.12); color: #b8860b;">Batal</button> <button type="submit" class="flex-1 px-4 py-2 rounded-lg text-sm font-semibold" style="background: #b8860b; color: #0d0d1a;">Simpan</button>
        </div>
@@ -534,13 +635,18 @@ footer{
 
     let allRecords = [];
 
-fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec")
+fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec")
   .then(r => r.json())
   .then(data => {
 
    allRecords = data.map(r => ({
+
   ...r,
-  id: String(r.id)
+
+  id: String(r.id || '').trim(),
+
+  photo: String(r.photo || '').trim()
+
 }));
 
     updateView();
@@ -549,13 +655,13 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
   });
 
 let visitors = [];
-let currentTab = 'mapen';
+let currentTab = 'MAPeNS';
 let isAdminMode = false;
 let currentUserRole = null;
 let deleteTarget = null;
 
     const tabInfo = {
-      mapen: { title: "Penerima Anugerah MAPEN", desc: "Menerima Anugerah Pengurusan Cemerlang", icon: "award" },
+      MAPeNS: { title: "Penerima Anugerah MAPeNS", desc: "Menerima Anugerah Pengurusan Cemerlang", icon: "award" },
       apc: { title: "Penerima Anugerah APC", desc: "Anugerah Perkhidmatan Cemerlang", icon: "trophy" },
       pangkat: { title: "Penerima Kenaikan Pangkat", desc: "Tahniah atas kenaikan pangkat yang diterima", icon: "trending-up" },
       pesara: { title: "Penerima Pesara", desc: "Penghargaan atas jasa & dedikasi sepanjang perkhidmatan", icon: "heart" },
@@ -567,7 +673,7 @@ let deleteTarget = null;
     };
 
     const colorSchemes = {
-      mapen: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)', border: 'rgba(255,215,0,0.2)' },
+      MAPeNS: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)', border: 'rgba(255,215,0,0.2)' },
       apc: { accent: '#c0a040', badge: 'rgba(192,160,64,0.1)', border: 'rgba(192,160,64,0.2)' },
       pangkat: { accent: '#60c080', badge: 'rgba(96,192,128,0.1)', border: 'rgba(96,192,128,0.2)' },
       pesara: { accent: '#e07070', badge: 'rgba(224,112,112,0.1)', border: 'rgba(224,112,112,0.2)' },
@@ -576,7 +682,7 @@ let deleteTarget = null;
 
     function updateDashboard() {
       // Update dashboard counts to always match actual data
-      document.getElementById('dashMapen').textContent = allRecords.filter(r => r.tab === 'mapen').length;
+      document.getElementById('dashMAPeNS').textContent = allRecords.filter(r => r.tab === 'MAPeNS').length;
       document.getElementById('dashApc').textContent = allRecords.filter(r => r.tab === 'apc').length;
       document.getElementById('dashPangkat').textContent = allRecords.filter(r => r.tab === 'pangkat').length;
       document.getElementById('dashPesara').textContent = allRecords.filter(r => r.tab === 'pesara').length;
@@ -639,7 +745,7 @@ if (currentTab === 'pengunjung') {
       grid.innerHTML = '';
 
       const logoMap = {
-        mapen: window.elementSdk?.config?.logo_mapen || defaultConfig.logo_mapen,
+        MAPeNS: window.elementSdk?.config?.logo_MAPeNS || defaultConfig.logo_MAPeNS,
         apc: window.elementSdk?.config?.logo_apc || defaultConfig.logo_apc,
         pangkat: window.elementSdk?.config?.logo_pangkat || defaultConfig.logo_pangkat,
         pesara: window.elementSdk?.config?.logo_pesara || defaultConfig.logo_pesara
@@ -663,7 +769,55 @@ const qrId = `qr-${record.id}`; // ✅ LETAK SINI
 
         card.innerHTML = `
 <div class="mt-3 text-center">
-  <canvas id="${qrId}" style="margin:auto;"></canvas>
+
+<canvas
+  id="${qrId}"
+  style="margin:auto; display:none;">
+</canvas>
+
+  <button
+    onclick="downloadQR('${qrId}','${record.name}')"
+    class="mt-3 px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 mx-auto"
+    style="
+      background:rgba(96,192,128,0.15);
+      color:#60c080;
+      border:1px solid rgba(96,192,128,0.25);
+    "
+  >
+    <i data-lucide="download"
+       style="width:14px;height:14px;"></i>
+
+    Download QR
+  </button>
+
+</div>
+<div class="mb-4 text-center">
+
+  <img
+    src="${
+  record.photo &&
+  String(record.photo).trim() !== ''
+    ? String(record.photo).trim()
+    : 'https://i.imgur.com/6VBx3io.png'
+}"
+
+    alt="${record.name}"
+
+    class="w-28 h-28 object-cover rounded-full mx-auto"
+
+    onerror="this.src='https://i.imgur.com/6VBx3io.png'"
+
+    style="
+      width:110px;
+      height:110px;
+      border-radius:999px;
+      object-fit:cover;
+      border:3px solid rgba(212,175,55,0.35);
+      box-shadow:0 0 20px rgba(212,175,55,0.18);
+      background:#0d0d1a;
+    "
+  >
+
 </div>
           <div class="flex items-start gap-3 mb-3">
             <div class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-lg font-heading font-bold" style="background: ${colors.badge}; color: ${colors.accent};">
@@ -706,14 +860,22 @@ setTimeout(() => {
     }
 
     function updateAttendanceView() {
-      const allAttendance = allRecords.filter(r =>
+      const allAttendance = allRecords.filter(r => {
 
-  ['mapen','apc','pangkat','pesara']
-    .includes(
-      String(r.tab).trim().toLowerCase()
-    )
+  const tab =
+    String(r.tab || '')
+      .trim()
+      .toLowerCase();
 
-);
+  return [
+    'mapen',
+    'mapens',
+    'apc',
+    'pangkat',
+    'pesara'
+  ].includes(tab);
+
+});
       const colors = colorSchemes.kehadiran;
       const content = document.getElementById('attendanceContent');
       content.innerHTML = '';
@@ -748,7 +910,7 @@ const pending = allAttendance.filter(r =>
 
       // Group by category
       const categoryColors = {
-        mapen: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)' },
+        MAPeNS: { accent: '#ffd700', badge: 'rgba(255,215,0,0.1)' },
         apc: { accent: '#c0a040', badge: 'rgba(192,160,64,0.1)' },
         pangkat: { accent: '#60c080', badge: 'rgba(96,192,128,0.1)' },
         pesara: { accent: '#e07070', badge: 'rgba(224,112,112,0.1)' }
@@ -756,8 +918,8 @@ const pending = allAttendance.filter(r =>
 
       const categoryTitles = {
 
-  mapen:
-    `Penerima MAPEN (${allAttendance.filter(r => r.tab === 'mapen').length} orang)`,
+  MAPeNS:
+    `Penerima MAPeNS (${allAttendance.filter(r => r.tab === 'MAPeNS').length} orang)`,
 
   apc:
     `Penerima APC (${allAttendance.filter(r => r.tab === 'apc').length} orang)`,
@@ -770,7 +932,7 @@ const pending = allAttendance.filter(r =>
 
 };
 
-      const categories = ['mapen', 'apc', 'pangkat', 'pesara'];
+      const categories = ['MAPeNS', 'apc', 'pangkat', 'pesara'];
 
       categories.forEach(category => {
         const records = allAttendance.filter(r => r.tab === category);
@@ -798,15 +960,32 @@ const pending = allAttendance.filter(r =>
           let textColor = '#e8d5a3';
           let secondaryColor = '#8a7a5a';
           
-          if (record.attendance_status === 'present') {
-            rowBackground = 'rgba(96,192,128,0.15)';
-            rowBorder = 'rgba(96,192,128,0.4)';
-          } else if (record.attendance_status === 'absent') {
-            rowBackground = '#ff0000';
-            rowBorder = '#ff0000';
-            textColor = '#ffffff';
-            secondaryColor = '#ffffff';
-          }
+         if (
+  record.attendance_status === 'present' ||
+  record.attendance_status === 'Hadir'
+) {
+
+  // HIJAU
+  rowBackground = 'rgba(96,192,128,0.18)';
+  rowBorder = 'rgba(96,192,128,0.45)';
+
+  textColor = '#d8ffe4';
+  secondaryColor = '#9fe0b3';
+
+}
+else if (
+  record.attendance_status === 'absent' ||
+  record.attendance_status === 'Tidak Hadir'
+) {
+
+  // MERAH MUDA
+  rowBackground = 'rgba(255,120,140,0.18)';
+  rowBorder = 'rgba(255,120,140,0.45)';
+
+  textColor = '#ffdbe2';
+  secondaryColor = '#ffb3bf';
+
+}
           row.style.cssText = `background: ${rowBackground}; border: 1px solid ${rowBorder};`;
 
           const timeText = record.check_in_time ? `<div class="text-xs mt-1" style="color: ${secondaryColor};">Masa: ${record.check_in_time}</div>` : '';
@@ -859,7 +1038,7 @@ const pending = allAttendance.filter(r =>
         } else {
           record.attendance_status = status === 'present' ? 'Hadir' : 'Tidak Hadir';
           record.check_in_time = new Date().toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
-fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
+fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
   method: "POST",
   body: JSON.stringify({
     action: "attendance",
@@ -936,6 +1115,8 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
   document.getElementById('formSchool').value = record.school;
   document.getElementById('formRole').value = record.role;
   document.getElementById('formNote').value = record.note;
+document.getElementById('formPhoto').value =
+  record.photo || '';
 document.getElementById('formTable').value = record.table || ''; document.getElementById('formSeat').value = record.seat || '';
   document.getElementById('formIndex').value = id;
 
@@ -968,7 +1149,8 @@ document.getElementById('formTable').value = record.table || ''; document.getEle
     document.getElementById('formNote').value;
 const table = document.getElementById('formTable').value;
  const seat = document.getElementById('formSeat').value;
-
+const photo =
+  document.getElementById('formPhoto').value;
   const submitBtn =
     e.target.querySelector('button[type="submit"]');
 
@@ -984,6 +1166,7 @@ tab: currentTab,
 name, 
 school, 
 role, 
+photo,
 note, 
 table, 
 seat, 
@@ -991,7 +1174,7 @@ attendance_status: '',
 check_in_time: '' 
 };
 
-    fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
       method: "POST",
       body: JSON.stringify({
         action: "add",
@@ -1052,6 +1235,7 @@ const updatedRecord = {
   name,
   school,
   role,
+photo,
   note,
   table,
   seat
@@ -1059,7 +1243,7 @@ const updatedRecord = {
 
 
 
-    fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
       method: "POST",
 
       body: JSON.stringify({
@@ -1121,7 +1305,7 @@ const updatedRecord = {
 
       setTimeout(() => {
 
-  fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
     method: "POST",
     body: JSON.stringify({
       action: "delete",
@@ -1359,39 +1543,6 @@ function playBeep() {
   oscillator.type = 'sine';
 
   oscillator.frequency.setValueAtTime(
-    1400,
-    audioCtx.currentTime
-  );
-
-  gainNode.gain.setValueAtTime(
-    0.5,
-    audioCtx.currentTime
-  );
-
-  oscillator.connect(gainNode);
-
-  gainNode.connect(audioCtx.destination);
-
-  oscillator.start();
-
-  oscillator.stop(
-    audioCtx.currentTime + 0.15
-  );
-}
-function playBeep() {
-
-  const audioCtx =
-    new (window.AudioContext || window.webkitAudioContext)();
-
-  const oscillator =
-    audioCtx.createOscillator();
-
-  const gainNode =
-    audioCtx.createGain();
-
-  oscillator.type = 'sine';
-
-  oscillator.frequency.setValueAtTime(
     900,
     audioCtx.currentTime
   );
@@ -1453,7 +1604,7 @@ record.check_in_time =
     minute: '2-digit'
   });
 
-fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JFE56MA58pOsBwQ0okZF6JMLB4GhL2xq65EK/exec", {
+fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
   method: "POST",
   body: JSON.stringify({
     action: "attendance",
@@ -1568,7 +1719,7 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
 
       // Reset to regular view when not on attendance tab
       if (currentTab === 'kehadiran') {
-        switchTab('mapen');
+        switchTab('MAPeNS');
       }
       
       updateView();
@@ -1584,7 +1735,7 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
       main_title: "Majlis Apresiasi\nPengurusan Sekolah",
       event_date: "15 Mac 2026",
       event_venue: "Dewan Komuniti Kota Marudu",
-      logo_mapen: "🎖️",
+      logo_MAPeNS: "🎖️",
       logo_apc: "🏅",
       logo_pangkat: "📈",
       logo_pesara: "💝",
@@ -1641,7 +1792,7 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
         ["main_title", config.main_title || defaultConfig.main_title],
         ["event_date", config.event_date || defaultConfig.event_date],
         ["event_venue", config.event_venue || defaultConfig.event_venue],
-        ["logo_mapen", config.logo_mapen || defaultConfig.logo_mapen],
+        ["logo_MAPeNS", config.logo_MAPeNS || defaultConfig.logo_MAPeNS],
         ["logo_apc", config.logo_apc || defaultConfig.logo_apc],
         ["logo_pangkat", config.logo_pangkat || defaultConfig.logo_pangkat],
         ["logo_pesara", config.logo_pesara || defaultConfig.logo_pesara],
@@ -1651,11 +1802,11 @@ fetch("https://script.google.com/macros/s/AKfycbz-vifKGwv9DsHP1i10kUKdKIviUuk0JF
     document.addEventListener('DOMContentLoaded', () => {
       const actionBtn = document.querySelector('[onclick="toggleAddForm()"]').parentElement;
       actionBtn.style.display = 'none';
-      switchTab('mapen');
+      switchTab('MAPeNS');
       lucide.createIcons();
     });
 
-    switchTab('mapen');
+    switchTab('MAPeNS');
     lucide.createIcons();
 function openSeatMap(id) {
 
@@ -1802,6 +1953,23 @@ function renderVisitors() {
     </div>
 
   `).join('');
+}
+function downloadQR(qrId, name){
+
+  const canvas =
+    document.getElementById(qrId);
+
+  const link =
+    document.createElement('a');
+
+  link.download =
+    `${name}-QR.png`;
+
+  link.href =
+    canvas.toDataURL("image/png");
+
+  link.click();
+
 }
 </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f0d87d3c538473c',t:'MTc3Njk1NDI1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><div id="seatMapModal"
