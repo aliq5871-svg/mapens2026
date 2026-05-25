@@ -1378,6 +1378,39 @@ function playBeep() {
     audioCtx.currentTime + 0.15
   );
 }
+function playBeep() {
+
+  const audioCtx =
+    new (window.AudioContext || window.webkitAudioContext)();
+
+  const oscillator =
+    audioCtx.createOscillator();
+
+  const gainNode =
+    audioCtx.createGain();
+
+  oscillator.type = 'sine';
+
+  oscillator.frequency.setValueAtTime(
+    900,
+    audioCtx.currentTime
+  );
+
+  gainNode.gain.setValueAtTime(
+    0.2,
+    audioCtx.currentTime
+  );
+
+  oscillator.connect(gainNode);
+
+  gainNode.connect(audioCtx.destination);
+
+  oscillator.start();
+
+  oscillator.stop(
+    audioCtx.currentTime + 0.15
+  );
+}
     function processQRData(recordId) {
 playBeep();
       const record = allRecords.find(r => r.id === recordId);
