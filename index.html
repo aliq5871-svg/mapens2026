@@ -144,15 +144,107 @@ function generateSeats(table, activeSeat) {
       animation: fadeUp 0.5s ease-out both;
     }
 
-    .hero-pattern {
-      background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212,175,55,0.03) 35px, rgba(212,175,55,0.03) 70px),
-        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(212,175,55,0.02) 35px, rgba(212,175,55,0.02) 70px),
-        radial-gradient(circle at 20% 50%, rgba(212,175,55,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.04) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(212,175,55,0.05) 0%, transparent 50%);
-    }
-    
+   .hero-pattern{
+
+  background-color:#000000 !important;
+
+  background-image:
+
+    /* Motif bunga batik */
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,215,0,0.18) 0px,
+      rgba(255,215,0,0.18) 8px,
+      transparent 10px
+    ),
+
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(212,175,55,0.16) 0px,
+      rgba(212,175,55,0.16) 7px,
+      transparent 9px
+    ),
+
+    radial-gradient(
+      circle at 40% 75%,
+      rgba(255,215,0,0.14) 0px,
+      rgba(255,215,0,0.14) 9px,
+      transparent 11px
+    ),
+
+    /* Lengkung ukiran tangan */
+    repeating-radial-gradient(
+      circle at center,
+      rgba(255,215,0,0.06) 0px,
+      rgba(255,215,0,0.06) 5px,
+      transparent 5px,
+      transparent 36px
+    ),
+
+    /* Sulur daun */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,215,0,0.035) 0px,
+      rgba(255,215,0,0.035) 3px,
+      transparent 3px,
+      transparent 24px
+    ),
+
+    repeating-linear-gradient(
+      -45deg,
+      rgba(184,134,11,0.03) 0px,
+      rgba(184,134,11,0.03) 3px,
+      transparent 3px,
+      transparent 24px
+    ),
+
+    /* Glow batik */
+    radial-gradient(
+      circle at center,
+      rgba(255,215,0,0.08) 0%,
+      transparent 60%
+    );
+
+  background-size:
+    220px 220px,
+    260px 260px,
+    300px 300px,
+    140px 140px,
+    80px 80px,
+    80px 80px,
+    100% 100%;
+
+  background-position:
+    0 0,
+    120px 40px,
+    60px 140px,
+    center,
+    center,
+    center,
+    center;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+.hero-pattern::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.58)
+    );
+
+  pointer-events:none;
+
+}    
     .sabah-sarawak-backdrop {
       background-image:
         repeating-linear-gradient(0deg, transparent, transparent 25px, rgba(212,175,55,0.04) 25px, rgba(212,175,55,0.04) 26px),
@@ -475,92 +567,8 @@ footer{
       </div>
      </div>
     </div>
-    <header class="hero-pattern relative overflow-hidden" style="background: linear-gradient(135deg, #000000 0%, #0a0a0f 40%, #000000 100%);">
-    <div class="absolute inset-0 pointer-events-none">
-
-  <!-- BATIK KIRI -->
-  <div
-    class="absolute top-0 left-0"
-    style="
-      width:420px;
-      height:420px;
-      opacity:0.45;
-
-      background-image:
-
-      radial-gradient(
-        circle,
-        rgba(255,215,0,0.45) 3px,
-        transparent 4px
-      ),
-
-      repeating-radial-gradient(
-        circle at center,
-        rgba(212,175,55,0.18) 0px,
-        rgba(212,175,55,0.18) 4px,
-        transparent 4px,
-        transparent 32px
-      ),
-
-      repeating-linear-gradient(
-        45deg,
-        rgba(255,215,0,0.10) 0px,
-        rgba(255,215,0,0.10) 3px,
-        transparent 3px,
-        transparent 48px
-      );
-
-      background-size:
-        60px 60px,
-        160px 160px,
-        100px 100px;
-
-      clip-path:polygon(0 0,100% 0,0 100%);
-    ">
-  </div>
-
-  <!-- BATIK KANAN -->
-  <div
-    class="absolute top-0 right-0"
-    style="
-      width:420px;
-      height:420px;
-      opacity:0.45;
-
-      background-image:
-
-      radial-gradient(
-        circle,
-        rgba(255,215,0,0.45) 3px,
-        transparent 4px
-      ),
-
-      repeating-radial-gradient(
-        circle at center,
-        rgba(212,175,55,0.18) 0px,
-        rgba(212,175,55,0.18) 4px,
-        transparent 4px,
-        transparent 32px
-      ),
-
-      repeating-linear-gradient(
-        -45deg,
-        rgba(255,215,0,0.10) 0px,
-        rgba(255,215,0,0.10) 3px,
-        transparent 3px,
-        transparent 48px
-      );
-
-      background-size:
-        60px 60px,
-        160px 160px,
-        100px 100px;
-
-      clip-path:polygon(100% 0,100% 100%,0 0);
-    ">
-  </div>
-
-</div><div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10"> <div class="anim-fade anim-d1 mb-6"> <div class="inline-flex items-center justify-center rounded-full border-2" style=" width:150px; height:150px; border-color:#d4af37; background:rgba(212,175,55,0.08); box-shadow:0 0 40px rgba(212,175,55,0.18); " > <img src="https://i.imgur.com/eY5HQvD.png" alt="Logo PPD Kota Marudu" class="w-32 h-32 object-contain" style=" filter: drop-shadow( 0 0 18px rgba(255,215,0,0.4) ); " > </div>
+    <header class="hero-pattern relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center relative z-10"> <div class="anim-fade anim-d1 mb-6"> <div class="inline-flex items-center justify-center rounded-full border-2" style=" width:150px; height:150px; border-color:#d4af37; background:rgba(212,175,55,0.08); box-shadow:0 0 40px rgba(212,175,55,0.18); " > <img src="https://i.imgur.com/eY5HQvD.png" alt="Logo PPD Kota Marudu" class="w-32 h-32 object-contain" style=" filter: drop-shadow( 0 0 18px rgba(255,215,0,0.4) ); " > </div>
  </div>
       <p class="anim-fade anim-d2 text-xs md:text-sm tracking-[0.35em] uppercase mb-4" style="color: #c9a227;">Pejabat Pendidikan Daerah Kota Marudu</p>
       <h1 id="mainTitle" class="anim-fade anim-d3 font-heading font-800 text-3xl md:text-5xl lg:text-6xl leading-tight mb-4 gold-shimmer anim-title-glow anim-title-float">Majlis Apresiasi<br>
