@@ -49,6 +49,7 @@ function generateSeats(table, activeSeat) {
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
   <style>
+
     html, body { height: 100%; margin: 0; }
     * { box-sizing: border-box; }
 
@@ -349,6 +350,86 @@ footer{
   .py-8{
     padding-top:1rem !important;
     padding-bottom:1rem !important;
+  }
+
+}
+/* =========================
+   TAB SAMA SAIZ
+========================= */
+
+#tabNav{
+
+  display:grid !important;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(140px,1fr));
+
+  gap:12px;
+
+  width:100%;
+
+}
+
+#tabNav button{
+
+  width:100% !important;
+
+  min-height:56px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:12px 14px !important;
+
+  border-radius:16px;
+
+  font-weight:600;
+
+  transition:all .25s ease;
+
+}
+
+#tabNav button:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(212,175,55,0.12);
+
+}
+
+@media (max-width:768px){
+
+  #tabNav{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  #tabNav{
+
+    gap:8px;
+
+  }
+
+  #tabNav button{
+
+    min-height:52px;
+
+    font-size:0.85rem !important;
+
+    padding:10px !important;
+
   }
 
 }
