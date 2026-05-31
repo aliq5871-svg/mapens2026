@@ -8,7 +8,29 @@
 
 <script>
 function getSeatPosition(seat) { const positions = { A1: { top:'45%', left:'58%' }, A2: { top:'45%', left:'65%' }, A3: { top:'52%', left:'58%' }, A4: { top:'52%', left:'65%' }, B1: { top:'30%', left:'40%' }, B2: { top:'30%', left:'47%' } }; return positions[seat] || { top:'50%', left:'50%' }; }
+
 function showSeatMap(id) { const record = allRecords.find(r => r.id == id); const pos = getSeatPosition(record.seat); document.getElementById('seatMapContent') .innerHTML = ` <div class="text-center mb-4"> <h2 class="text-xl font-bold" style="color:#e8d5a3;" > ${record.name} </h2> <p style="color:#d1d5db; margin-top:8px;"> Meja: ${record.table || '-'} </p> <p style="color:#ffffff; margin-top:4px;"> Kerusi: ${record.seat || '-'} </p></p> </div> <div class="mt-6 relative"> <img src="https://i.imgur.com/U2XmiSJ.png" class="w-full rounded-xl" style=" border:1px solid rgba(74,154,255,0.2); " > <div style=" position:absolute; top:${pos.top}; left:${pos.left}; transform:translate(-50%,-50%); width:28px; height:28px; border-radius:999px; background:#4a9aff; color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:bold; box-shadow:0 0 20px rgba(74,154,255,0.6); " > ${record.seat} </div> </div> `; document.getElementById('seatMapModal') .classList.remove('hidden'); }
+function showOnStage(id){
+
+  const record =
+    allRecords.find(r => r.id == id);
+
+  if(!record) return;
+
+  fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec",{
+    method:"POST",
+    body:JSON.stringify({
+      action:"showSlide",
+      id:id
+    })
+  });
+
+  showToast(
+    record.name +
+    " dipaparkan di LCD Pentas"
+  );
+
+}
 function closeSeatMap() {
   document.getElementById('seatMapModal')
           .classList.add('hidden');
@@ -43,7 +65,42 @@ function generateSeats(table, activeSeat) {
   });
 
   return html;
-}</script>
+}
+// AUTO REFRESH DATA
+setInterval(() => {
+
+  fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec")
+
+    .then(r => r.json())
+
+    .then(data => {
+
+      allRecords = data.map(r => ({
+
+        ...r,
+
+        id: String(r.id || '').trim(),
+
+        photo: String(r.photo || '').trim()
+
+      }));
+
+      updateView();
+
+      updateDashboard();
+
+      console.log("Auto refresh berjaya");
+
+    })
+
+    .catch(err => {
+
+      console.log("Auto refresh gagal", err);
+
+    });
+
+}, 30000);
+</script>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
@@ -228,6 +285,7 @@ function generateSeats(table, activeSeat) {
   overflow:hidden;
 
 }
+
 .hero-pattern::before{
 
   content:'';
@@ -1041,15 +1099,28 @@ const qrId = `qr-${record.id}`; // ✅ LETAK SINI
             ${record.note}
           </div>
 <div class="mt-3">
-  <button 
-   onclick="showSeatMap('${record.id}')"
+
+  <button
+    onclick="showSeatMap('${record.id}')"
     class="w-full px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2"
-    style="background: rgba(74,154,255,0.15); color: #4a9aff; border:1px solid rgba(74,154,255,0.25);"
+    style="background:rgba(74,154,255,0.15);color:#4a9aff;border:1px solid rgba(74,154,255,0.25);"
   >
-    <i data-lucide="map-pinned" style="width:14px;height:14px;"></i>
+    <i data-lucide="map-pinned"
+       style="width:14px;height:14px;"></i>
     Map Tempat Duduk
   </button>
-</div>
+
+  <button
+    onclick="showOnStage('${record.id}')"
+    class="w-full mt-2 px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2"
+    style="background:rgba(96,192,128,0.15);color:#60c080;border:1px solid rgba(96,192,128,0.25);"
+  >
+    <i data-lucide="monitor"
+       style="width:14px;height:14px;"></i>
+    Papar Di LCD
+  </button>
+
+</div>    
           ${editDeleteButtons}
         `;
         grid.appendChild(card);
@@ -1809,7 +1880,7 @@ record.check_in_time =
     minute: '2-digit'
   });
 
-fetch("https://script.google.com/macros/s/AKfycbyNjlP05xWhideoHvxLdWlAh5Zw0IR9g1VMHeXnezuAYv8Dk1x6H7-JJ6gNMih8cRpE/exec", {
+fetch("https://script.google.com/macros/s/AKfycby1e70AEf_4Dt0ReOid72B0Dl8PJ-4ori4EPch8pP2xtUGLHbbZMLZjZYFEna86XbIn/exec", {
   method: "POST",
   body: JSON.stringify({
     action: "attendance",
@@ -2065,6 +2136,32 @@ function closeSeatMap() {
   const modal = document.getElementById('seatMapModal');
 
   modal.classList.add('hidden');
+
+}
+function showOnStage(id){
+
+  fetch("https://script.google.com/macros/s/AKfycby1e70AEf_4Dt0ReOid72B0Dl8PJ-4ori4EPch8pP2xtUGLHbbZMLZjZYFEna86XbIn/exec",{
+    method:"POST",
+    body:JSON.stringify({
+      action:"showSlide",
+      id:id
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+
+    if(res.success){
+
+      alert("Penerima dipaparkan di LCD Pentas");
+
+    }
+
+  })
+  .catch(err => {
+
+    console.error(err);
+
+  });
 
 }
 function handleSeatModalClick(event) {
